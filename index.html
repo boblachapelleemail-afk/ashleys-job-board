@@ -15,6 +15,9 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 .api-row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
 .api-box label { font-size: 13px; color: #5f5e5a; white-space: nowrap; }
 .api-box input { flex: 1; min-width: 200px; border: 1px solid #d3d1c7; border-radius: 8px; padding: 6px 10px; font-size: 13px; font-family: monospace; color: #1a1a18; background: #f5f5f3; }
+.api-box input:focus { outline: none; border-color: #888780; background: white; }
+.saved-badge { font-size: 11px; color: #3B6D11; background: #EAF3DE; padding: 2px 8px; border-radius: 99px; display: none; }
+.clear-btn { font-size: 11px; color: #a32d2d; background: none; border: none; cursor: pointer; padding: 0; text-decoration: underline; display: none; }
 .api-note { font-size: 11px; color: #888780; margin-top: 8px; }
 .api-note a { color: #185FA5; }
 .controls { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-bottom: 1.5rem; }
@@ -53,9 +56,11 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 <div class="api-box">
 <div class="api-row">
 <label for="apikey">Anthropic API key</label>
-<input type="password" id="apikey" placeholder="sk-ant-..." autocomplete="off" />
+<input type="password" id="apikey" placeholder="sk-ant-..." autocomplete="off" oninput="onKeyInput()" />
+<span class="saved-badge" id="saved-badge">Saved</span>
+<button class="clear-btn" id="clear-btn" onclick="clearKey()">forget key</button>
 </div>
-<div class="api-note">Required. Get a free key at <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a> &rarr; API Keys. Never stored.</div>
+<div class="api-note" id="api-note">Enter your key once and it will be remembered on this browser. Get a key at <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a> &rarr; API Keys.</div>
 </div>
 <div class="controls">
 <button class="fb active" onclick="setFilter('all',this)">All</button>
@@ -68,18 +73,70 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 <button class="rb" id="rbtn" onclick="fetchJobs()">&#8635; Refresh listings</button>
 </div>
 <div id="status"></div>
-<div id="jobs"><div class="empty">Enter your API key above and click &#8635; Refresh listings to get started.</div></div>
+<div id="jobs"><div class="empty">Loading...</div></div>
 </div>
 <script>
 var allJobs=[],activeFilter='all';
 var TITLES="Associate Product Manager (medical device), Product Manager (medical device), Medical Science Liaison, Sales Force Enablement / Training, Client Success Manager, Clinical Education Specialist, Staff Sales Operations Analyst, Customer Success / Account Manager";
 var COMPANIES="BD, Arthrex, Stryker, Medtronic, Biotronik, Abbott, Zimmer Biomet, Boston Scientific, Insulet, Edwards Lifesciences, DePuy Synthes, Dexcom, Intuitive Surgical, Smith & Nephew, Globus Medical, Synergy Spine Solutions, Gore, Personify Health, Prompt AI, Ambience Healthcare, Limber Health";
+var LS_KEY='ashley_job_board_api_key';
+
+function loadSavedKey(){
+  var saved=localStorage.getItem(LS_KEY);
+  if(saved){
+    document.getElementById('apikey').value=saved;
+    document.getElementById('saved-badge').style.display='';
+    document.getElementById('clear-btn').style.display='';
+    document.getElementById('api-note').textContent='API key loaded automatically. Click "forget key" to remove it.';
+    fetchJobs();
+  } else {
+    document.getElementById('jobs').innerHTML='<div class="empty">Enter your API key above and click ↻ Refresh listings to get started.</div>';
+  }
+}
+
+function onKeyInput(){
+  var key=document.getElementById('apikey').value.trim();
+  if(key){
+    localStorage.setItem(LS_KEY,key);
+    document.getElementById('saved-badge').style.display='';
+    document.getElementById('clear-btn').style.display='';
+    document.getElementById('api-note').textContent='API key saved to this browser. Click "forget key" to remove it.';
+  }
+}
+
+function clearKey(){
+  localStorage.removeItem(LS_KEY);
+  document.getElementById('apikey').value='';
+  document.getElementById('saved-badge').style.display='none';
+  document.getElementById('clear-btn').style.display='none';
+  document.getElementById('api-note').textContent='Enter your key once and it will be remembered on this browser. Get a key at console.anthropic.com → API Keys.';
+  document.getElementById('jobs').innerHTML='<div class="empty">Enter your API key above and click ↻ Refresh listings to get started.</div>';
+}
+
 function catLabel(c){return({product:'Product / APM',msl:'MSL',sales:'Sales / enablement',cs:'Client success',clinical:'Clinical ed',ops:'Sales ops'})[c]||c;}
 function escHtml(s){if(!s)return'';return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 function setFilter(f,btn){activeFilter=f;document.querySelectorAll('.fb').forEach(function(b){b.classList.remove('active');});btn.classList.add('active');renderJobs();}
 function renderJobs(){var c=document.getElementById('jobs'),el=document.getElementById('cnt'),list=allJobs;if(activeFilter==='remote')list=allJobs.filter(function(j){return j.isRemote;});else if(activeFilter!=='all')list=allJobs.filter(function(j){return j.category===activeFilter;});el.style.display='';el.textContent=list.length+' jobs';if(!list.length){c.innerHTML='<div class="empty">No listings matched this filter.</div>';return;}c.innerHTML=list.map(function(j){return'<div class="card"><div class="jtitle">'+escHtml(j.title)+'</div><div class="jco">'+escHtml(j.company)+'</div><div class="badges"><span class="badge bp">'+catLabel(j.category)+'</span><span class="badge bl">'+escHtml(j.location)+'</span>'+(j.isRemote?'<span class="badge bg">Remote</span>':'')+(j.source?'<span class="badge bs">'+escHtml(j.source)+'</span>':'')+(j.posted?'<span class="badge bdate">'+escHtml(j.posted)+'</span>':'')+(j.salary?'<span class="badge bs">'+escHtml(j.salary)+'</span>':'')+'</div><div class="jsumm">'+escHtml(j.summary)+'</div>'+(j.url?'<a class="jlink" href="'+escHtml(j.url)+'" target="_blank">View listing &rarr;</a>':'')+'</div>';}).join('');}
 function showError(msg,detail){document.getElementById('jobs').innerHTML='';document.getElementById('status').innerHTML='<div class="errmsg">'+msg+(detail?'<code>'+escHtml(detail)+'</code>':'')+'</div>';}
-function fetchJobs(){var key=document.getElementById('apikey').value.trim();if(!key){showError('Please enter your Anthropic API key above first.',null);return;}var btn=document.getElementById('rbtn');btn.disabled=true;btn.textContent='Searching...';document.getElementById('status').innerHTML='';document.getElementById('jobs').innerHTML='<div class="loading"><div class="spinner"></div>Searching Indeed, LinkedIn, ZipRecruiter &amp; more for jobs posted in the last 48 hours...</div>';document.getElementById('cnt').style.display='none';var today=new Date().toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});var prompt='Today is '+today+'. Ashley is a licensed PT (DPT, OCS), 15 yrs exp, Clinic Director at Banner PT in Mesa AZ, pivoting to med-device/health-tech. Orthopedic/MSK expertise, P&L, team building, clinical instruction.\n\nSearch SPECIFICALLY on these job sites for listings posted in the LAST 48 HOURS ONLY:\n- Indeed (indeed.com) - search with "date posted: last 2 days" filter\n- LinkedIn Jobs (linkedin.com/jobs) - search with "Past 24-48 hours" filter\n- ZipRecruiter (ziprecruiter.com) - search with date filter\n- Glassdoor (glassdoor.com/Job)\n- Company career pages for the target companies\n\nTITLES TO SEARCH: '+TITLES+'\nTARGET COMPANIES (prioritize): '+COMPANIES+'\nLOCATION: Phoenix/Mesa/Gilbert/Chandler/Scottsdale AZ metro OR remote-eligible for AZ candidates.\n\nCRITICAL: ONLY include jobs you can confirm were posted within the last 48 hours. Do NOT include older listings. If you cannot verify the posting date, exclude it.\n\nFor each job include which site it was found on (Indeed, LinkedIn, etc.) and when it was posted (e.g. "Posted today", "Posted 1 day ago").\n\nReturn ONLY raw JSON array (no markdown, no backticks):\n[{"title":"...","company":"...","location":"...","salary":"...or null","source":"Indeed/LinkedIn/ZipRecruiter/etc","posted":"Posted today / Posted 1 day ago","summary":"2-3 sentences why great fit for Ashley","url":"...or null","isRemote":true or false,"category":"product|msl|sales|cs|clinical|ops"}]\n\nOnly real listings confirmed posted in the last 48 hours.';fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:4000,tools:[{type:'web_search_20250305',name:'web_search'}],messages:[{role:'user',content:prompt}]})}).then(function(r){if(!r.ok)return r.text().then(function(t){throw new Error('HTTP '+r.status+': '+t);});return r.json();}).then(function(d){if(d.error)throw new Error(d.error.message);var raw='';(d.content||[]).forEach(function(b){if(b.type==='text')raw+=b.text;});raw=raw.replace(/```json|```/g,'').trim();var s=raw.indexOf('['),e=raw.lastIndexOf(']');if(s<0||e<0)throw new Error('No JSON found: '+raw.slice(0,200));allJobs=JSON.parse(raw.slice(s,e+1));if(!allJobs.length)throw new Error('No jobs found in the last 48 hours. Try refreshing later.');document.getElementById('subtitle').textContent='Last refreshed '+new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'})+' · '+today+' · last 48 hrs only';renderJobs();}).catch(function(err){showError('Could not load listings:',err.message);}).finally(function(){btn.disabled=false;btn.textContent='↻ Refresh listings';});}
+
+function fetchJobs(){
+  var key=document.getElementById('apikey').value.trim();
+  if(!key){showError('Please enter your Anthropic API key above first.',null);return;}
+  var btn=document.getElementById('rbtn');
+  btn.disabled=true;btn.textContent='Searching...';
+  document.getElementById('status').innerHTML='';
+  document.getElementById('jobs').innerHTML='<div class="loading"><div class="spinner"></div>Searching Indeed, LinkedIn, ZipRecruiter &amp; more for jobs posted in the last 48 hours...</div>';
+  document.getElementById('cnt').style.display='none';
+  var today=new Date().toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  var prompt='Today is '+today+'. Ashley is a licensed PT (DPT, OCS), 15 yrs exp, Clinic Director at Banner PT in Mesa AZ, pivoting to med-device/health-tech. Orthopedic/MSK expertise, P&L, team building, clinical instruction.\n\nSearch SPECIFICALLY on these job sites for listings posted in the LAST 48 HOURS ONLY:\n- Indeed (indeed.com) - use date filter\n- LinkedIn Jobs (linkedin.com/jobs) - use Past 24-48 hours filter\n- ZipRecruiter (ziprecruiter.com) - use date filter\n- Glassdoor (glassdoor.com/Job)\n- Company career pages for the target companies\n\nTITLES TO SEARCH: '+TITLES+'\nTARGET COMPANIES (prioritize): '+COMPANIES+'\nLOCATION: Phoenix/Mesa/Gilbert/Chandler/Scottsdale AZ metro OR remote-eligible for AZ candidates.\n\nCRITICAL: ONLY include jobs confirmed posted within the last 48 hours. Exclude anything older. If you cannot verify the posting date, exclude it.\n\nReturn ONLY raw JSON array (no markdown, no backticks):\n[{"title":"...","company":"...","location":"...","salary":"...or null","source":"Indeed/LinkedIn/ZipRecruiter/etc","posted":"Posted today / Posted 1 day ago","summary":"2-3 sentences why great fit for Ashley","url":"...or null","isRemote":true or false,"category":"product|msl|sales|cs|clinical|ops"}]\n\nOnly real listings confirmed posted in the last 48 hours.';
+  fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:4000,tools:[{type:'web_search_20250305',name:'web_search'}],messages:[{role:'user',content:prompt}]})})
+  .then(function(r){if(!r.ok)return r.text().then(function(t){throw new Error('HTTP '+r.status+': '+t);});return r.json();})
+  .then(function(d){if(d.error)throw new Error(d.error.message);var raw='';(d.content||[]).forEach(function(b){if(b.type==='text')raw+=b.text;});raw=raw.replace(/```json|```/g,'').trim();var s=raw.indexOf('['),e=raw.lastIndexOf(']');if(s<0||e<0)throw new Error('No JSON found: '+raw.slice(0,200));allJobs=JSON.parse(raw.slice(s,e+1));if(!allJobs.length)throw new Error('No jobs found in the last 48 hours. Try again later.');document.getElementById('subtitle').textContent='Last refreshed '+new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'})+' · '+today+' · last 48 hrs only';renderJobs();})
+  .catch(function(err){showError('Could not load listings:',err.message);})
+  .finally(function(){btn.disabled=false;btn.textContent='↻ Refresh listings';});
+}
+
+window.addEventListener('load', loadSavedKey);
 </script>
 </body>
 </html>
