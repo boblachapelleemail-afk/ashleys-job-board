@@ -3,71 +3,121 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ashley's Daily Job Report</title>
+<title>Ashley's Career Hub</title>
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f3; color: #1a1a18; min-height: 100vh; padding: 1rem; }
-.container { max-width: 820px; margin: 0 auto; }
-.header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; padding-bottom: 0.6rem; border-bottom: 1px solid #e0dfd8; margin-bottom: 0.75rem; }
-.header-left { display: flex; align-items: center; gap: 10px; }
-.header h1 { font-size: 15px; font-weight: 600; color: #1a1a18; }
-.header p { font-size: 11px; color: #888780; }
-.freshbadge { font-size: 10px; background: #EAF3DE; color: #3B6D11; padding: 2px 7px; border-radius: 99px; font-weight: 500; white-space: nowrap; }
-.motd { background: white; border: 1px solid #e0dfd8; border-left: 3px solid #185FA5; border-radius: 8px; padding: 0.6rem 0.9rem; margin-bottom: 0.9rem; display: flex; align-items: flex-start; gap: 10px; }
-.motd-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
-.motd-text { font-size: 13px; color: #2c2c2a; line-height: 1.5; }
-.motd-text strong { font-weight: 600; color: #1a1a18; display: block; margin-bottom: 2px; font-size: 12px; }
-.api-box { background: white; border: 1px solid #e0dfd8; border-radius: 10px; padding: 0.7rem 1rem; margin-bottom: 0.9rem; }
-.api-row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
-.api-box label { font-size: 12px; color: #5f5e5a; white-space: nowrap; }
-.api-box input { flex: 1; min-width: 180px; border: 1px solid #d3d1c7; border-radius: 7px; padding: 5px 9px; font-size: 12px; font-family: monospace; color: #1a1a18; background: #f5f5f3; }
-.api-box input:focus { outline: none; border-color: #888780; background: white; }
-.saved-badge { font-size: 10px; color: #3B6D11; background: #EAF3DE; padding: 2px 7px; border-radius: 99px; display: none; }
-.clear-btn { font-size: 11px; color: #a32d2d; background: none; border: none; cursor: pointer; padding: 0; text-decoration: underline; display: none; }
-.api-note { font-size: 10px; color: #b4b2a9; margin-top: 5px; }
-.api-note a { color: #185FA5; }
-.controls { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; margin-bottom: 1rem; }
-.fb { background: white; border: 1px solid #d3d1c7; border-radius: 7px; padding: 5px 12px; font-size: 12px; cursor: pointer; color: #1a1a18; }
-.fb.active { background: #f1efe8; border-color: #888780; font-weight: 500; }
-.rb { background: white; border: 1px solid #d3d1c7; border-radius: 7px; padding: 5px 12px; font-size: 12px; cursor: pointer; margin-left: auto; color: #1a1a18; }
-.rb:disabled { opacity: 0.45; cursor: not-allowed; }
-.card { background: white; border: 1px solid #e0dfd8; border-radius: 10px; padding: 0.85rem 1rem; margin-bottom: 0.65rem; }
-.jtitle { font-size: 14px; font-weight: 500; }
-.jco { font-size: 12px; color: #888780; margin-top: 2px; }
-.badges { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 8px; }
-.badge { font-size: 10px; padding: 2px 8px; border-radius: 99px; }
-.bp { background: #EEEDFE; color: #3C3489; }
-.bl { background: #E6F1FB; color: #0C447C; }
-.bg { background: #EAF3DE; color: #3B6D11; }
-.bs { background: #f1efe8; color: #5f5e5a; border: 1px solid #e0dfd8; }
-.bdate { background: #FAEEDA; color: #854F0B; }
-.jsumm { font-size: 12px; color: #5f5e5a; margin-top: 8px; line-height: 1.6; }
-.jlink { display: inline-block; margin-top: 8px; font-size: 12px; color: #185FA5; text-decoration: none; }
-.loading { text-align: center; padding: 3rem; color: #888780; font-size: 13px; }
-.spinner { width: 24px; height: 24px; border: 2px solid #e0dfd8; border-top-color: #888780; border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 10px; }
-@keyframes spin { to { transform: rotate(360deg); } }
-.errmsg { background: #fcebeb; border: 1px solid #f7c1c1; border-radius: 8px; padding: 0.85rem; font-size: 12px; color: #a32d2d; margin-bottom: 1rem; }
-.cnt { display: inline-block; background: #f1efe8; border: 1px solid #e0dfd8; border-radius: 99px; font-size: 11px; padding: 1px 8px; margin-left: 6px; color: #888780; }
-.empty { font-size: 13px; color: #888780; padding: 2rem 0; text-align: center; }
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f3;color:#1a1a18;min-height:100vh;}
+.topbar{background:white;border-bottom:1px solid #e0dfd8;padding:0.6rem 1rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;position:sticky;top:0;z-index:100;}
+.topbar-left{display:flex;align-items:center;gap:10px;}
+.topbar h1{font-size:14px;font-weight:600;}
+.topbar p{font-size:10px;color:#888780;}
+.tabs{display:flex;gap:2px;background:#f1efe8;border-radius:8px;padding:3px;}
+.tab{padding:5px 14px;font-size:12px;border:none;background:transparent;border-radius:6px;cursor:pointer;color:#5f5e5a;font-weight:500;white-space:nowrap;}
+.tab.active{background:white;color:#1a1a18;box-shadow:0 1px 3px rgba(0,0,0,0.08);}
+.page{display:none;padding:1rem;max-width:820px;margin:0 auto;}
+.page.active{display:block;}
+.motd{background:white;border:1px solid #e0dfd8;border-left:3px solid #185FA5;border-radius:8px;padding:0.6rem 0.9rem;margin-bottom:0.9rem;display:flex;align-items:flex-start;gap:10px;}
+.motd-icon{font-size:16px;flex-shrink:0;}
+.motd-text{font-size:12px;color:#2c2c2a;line-height:1.5;}
+.motd-text strong{font-weight:600;display:block;margin-bottom:1px;font-size:11px;}
+.api-box{background:white;border:1px solid #e0dfd8;border-radius:10px;padding:0.6rem 0.9rem;margin-bottom:0.9rem;}
+.api-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
+.api-box label{font-size:11px;color:#5f5e5a;white-space:nowrap;}
+.api-box input[type=password]{flex:1;min-width:160px;border:1px solid #d3d1c7;border-radius:6px;padding:4px 8px;font-size:11px;font-family:monospace;background:#f5f5f3;}
+.api-box input[type=password]:focus{outline:none;border-color:#888780;background:white;}
+.saved-badge{font-size:10px;color:#3B6D11;background:#EAF3DE;padding:2px 7px;border-radius:99px;display:none;}
+.clear-btn{font-size:10px;color:#a32d2d;background:none;border:none;cursor:pointer;text-decoration:underline;display:none;}
+.api-note{font-size:10px;color:#b4b2a9;margin-top:4px;}
+.api-note a{color:#185FA5;}
+.controls{display:flex;gap:5px;flex-wrap:wrap;align-items:center;margin-bottom:0.9rem;}
+.fb{background:white;border:1px solid #d3d1c7;border-radius:6px;padding:4px 11px;font-size:11px;cursor:pointer;color:#1a1a18;}
+.fb.active{background:#f1efe8;border-color:#888780;font-weight:500;}
+.rb{background:white;border:1px solid #d3d1c7;border-radius:6px;padding:4px 11px;font-size:11px;cursor:pointer;margin-left:auto;color:#1a1a18;}
+.rb:disabled{opacity:0.45;cursor:not-allowed;}
+.card{background:white;border:1px solid #e0dfd8;border-radius:10px;padding:0.8rem;margin-bottom:0.6rem;}
+.card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;}
+.jtitle{font-size:13px;font-weight:500;}
+.jco{font-size:11px;color:#888780;margin-top:2px;}
+.card-actions{display:flex;gap:5px;flex-shrink:0;}
+.btn-sm{font-size:10px;padding:3px 9px;border-radius:5px;border:1px solid #d3d1c7;background:white;cursor:pointer;color:#1a1a18;white-space:nowrap;}
+.btn-sm.primary{background:#1a1a18;color:white;border-color:#1a1a18;}
+.btn-sm.success{background:#EAF3DE;color:#3B6D11;border-color:#c0dd97;}
+.badges{display:flex;gap:4px;flex-wrap:wrap;margin-top:7px;}
+.badge{font-size:10px;padding:2px 7px;border-radius:99px;}
+.bp{background:#EEEDFE;color:#3C3489;}.bl{background:#E6F1FB;color:#0C447C;}.bg{background:#EAF3DE;color:#3B6D11;}.bs{background:#f1efe8;color:#5f5e5a;border:1px solid #e0dfd8;}.bdate{background:#FAEEDA;color:#854F0B;}
+.jsumm{font-size:11px;color:#5f5e5a;margin-top:7px;line-height:1.6;}
+.jlink{display:inline-block;margin-top:6px;font-size:11px;color:#185FA5;text-decoration:none;}
+.loading{text-align:center;padding:3rem;color:#888780;font-size:13px;}
+.spinner{width:22px;height:22px;border:2px solid #e0dfd8;border-top-color:#888780;border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 10px;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.errmsg{background:#fcebeb;border:1px solid #f7c1c1;border-radius:8px;padding:0.75rem;font-size:11px;color:#a32d2d;margin-bottom:0.8rem;}
+.cnt{display:inline-block;background:#f1efe8;border:1px solid #e0dfd8;border-radius:99px;font-size:10px;padding:1px 7px;margin-left:5px;color:#888780;}
+.empty{font-size:13px;color:#888780;padding:2rem 0;text-align:center;}
+
+/* Chat */
+.chat-wrap{display:flex;flex-direction:column;height:calc(100vh - 160px);min-height:400px;}
+.chat-msgs{flex:1;overflow-y:auto;background:white;border:1px solid #e0dfd8;border-radius:10px;padding:1rem;margin-bottom:0.75rem;display:flex;flex-direction:column;gap:10px;}
+.msg{max-width:85%;padding:0.6rem 0.85rem;border-radius:10px;font-size:12px;line-height:1.6;}
+.msg.user{align-self:flex-end;background:#1a1a18;color:white;border-radius:10px 10px 2px 10px;}
+.msg.assistant{align-self:flex-start;background:#f1efe8;color:#1a1a18;border-radius:10px 10px 10px 2px;}
+.msg.assistant pre{white-space:pre-wrap;font-family:inherit;}
+.chat-input-row{display:flex;gap:8px;}
+.chat-input-row textarea{flex:1;border:1px solid #d3d1c7;border-radius:8px;padding:8px 10px;font-size:12px;font-family:inherit;resize:none;height:60px;background:white;}
+.chat-input-row textarea:focus{outline:none;border-color:#888780;}
+.chat-send{background:#1a1a18;color:white;border:none;border-radius:8px;padding:8px 16px;font-size:12px;cursor:pointer;}
+.chat-send:disabled{opacity:0.4;cursor:not-allowed;}
+.chat-hint{font-size:11px;color:#888780;margin-bottom:0.5rem;}
+
+/* Resume */
+.resume-wrap{display:flex;flex-direction:column;gap:0.75rem;}
+.section-label{font-size:11px;font-weight:600;color:#5f5e5a;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.04em;}
+textarea.big{width:100%;border:1px solid #d3d1c7;border-radius:8px;padding:0.75rem;font-size:12px;font-family:monospace;resize:vertical;background:white;min-height:160px;}
+textarea.big:focus{outline:none;border-color:#888780;}
+.job-select{width:100%;border:1px solid #d3d1c7;border-radius:8px;padding:6px 10px;font-size:12px;background:white;}
+.result-box{background:white;border:1px solid #e0dfd8;border-radius:8px;padding:1rem;font-size:12px;line-height:1.7;white-space:pre-wrap;min-height:100px;color:#1a1a18;}
+.action-btn{background:#1a1a18;color:white;border:none;border-radius:7px;padding:7px 18px;font-size:12px;cursor:pointer;}
+.action-btn:disabled{opacity:0.4;cursor:not-allowed;}
+.action-btn.sec{background:white;color:#1a1a18;border:1px solid #d3d1c7;}
+
+/* Tracker */
+.tracker-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem;}
+.tracker-header h2{font-size:13px;font-weight:600;}
+.tracker-table{width:100%;border-collapse:collapse;background:white;border-radius:10px;overflow:hidden;border:1px solid #e0dfd8;font-size:11px;}
+.tracker-table th{background:#f5f5f3;padding:8px 10px;text-align:left;font-weight:600;color:#5f5e5a;border-bottom:1px solid #e0dfd8;}
+.tracker-table td{padding:8px 10px;border-bottom:1px solid #f1efe8;vertical-align:top;}
+.tracker-table tr:last-child td{border-bottom:none;}
+.status-select{border:1px solid #d3d1c7;border-radius:5px;padding:2px 6px;font-size:11px;background:white;}
+.status-applied{color:#185FA5;}.status-screen{color:#854F0B;}.status-interview{color:#3C3489;}.status-offer{color:#3B6D11;}.status-rejected{color:#a32d2d;}
+.notes-input{border:1px solid #d3d1c7;border-radius:5px;padding:3px 6px;font-size:11px;width:100%;min-width:80px;}
+.del-btn{background:none;border:none;color:#b4b2a9;cursor:pointer;font-size:14px;padding:0 4px;}
+.del-btn:hover{color:#a32d2d;}
+.tracker-empty{text-align:center;padding:2rem;color:#888780;font-size:12px;}
+.stats-row{display:flex;gap:8px;margin-bottom:0.9rem;flex-wrap:wrap;}
+.stat-card{background:white;border:1px solid #e0dfd8;border-radius:8px;padding:0.6rem 0.9rem;flex:1;min-width:80px;text-align:center;}
+.stat-card .num{font-size:20px;font-weight:600;}
+.stat-card .lbl{font-size:10px;color:#888780;margin-top:2px;}
 </style>
 </head>
 <body>
-<div class="container">
-  <div class="header">
-    <div class="header-left">
-      <div>
-        <h1>Ashley's daily job report <span class="cnt" id="cnt" style="display:none"></span></h1>
-        <p id="subtitle">med-device &middot; MSL &middot; product &middot; clinical ed &middot; sales ops &middot; Indeed, LinkedIn, ZipRecruiter</p>
-      </div>
-      <span class="freshbadge">Fresh listings</span>
+
+<div class="topbar">
+  <div class="topbar-left">
+    <div>
+      <h1>Ashley's career hub</h1>
+      <p id="topbar-sub">med-device &middot; MSL &middot; product &middot; clinical ed &middot; sales ops</p>
     </div>
   </div>
-
-  <div class="motd" id="motd">
-    <div class="motd-icon" id="motd-icon"></div>
-    <div class="motd-text"><strong id="motd-title"></strong><span id="motd-body"></span></div>
+  <div class="tabs">
+    <button class="tab active" onclick="showTab('jobs',this)">&#128269; Jobs</button>
+    <button class="tab" onclick="showTab('chat',this)">&#128172; Ask Claude</button>
+    <button class="tab" onclick="showTab('resume',this)">&#128196; Resume Tailor</button>
+    <button class="tab" onclick="showTab('tracker',this)">&#10003; Tracker <span class="cnt" id="tracker-cnt" style="display:none"></span></button>
   </div>
+</div>
 
+<!-- JOBS TAB -->
+<div id="tab-jobs" class="page active">
+  <div class="motd"><div class="motd-icon" id="motd-icon"></div><div class="motd-text"><strong id="motd-title"></strong><span id="motd-body"></span></div></div>
   <div class="api-box">
     <div class="api-row">
       <label for="apikey">API key</label>
@@ -75,9 +125,8 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
       <span class="saved-badge" id="saved-badge">Saved</span>
       <button class="clear-btn" id="clear-btn" onclick="clearKey()">forget</button>
     </div>
-    <div class="api-note" id="api-note">Enter your key once and it will be saved to this browser. Get one at <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a>.</div>
+    <div class="api-note" id="api-note">Enter your key once and it will be saved. Get one at <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a>.</div>
   </div>
-
   <div class="controls">
     <button class="fb active" onclick="setFilter('all',this)">All</button>
     <button class="fb" onclick="setFilter('product',this)">Product / APM</button>
@@ -88,174 +137,357 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
     <button class="fb" onclick="setFilter('remote',this)">Remote</button>
     <button class="rb" id="rbtn" onclick="fetchJobs()">&#8635; Refresh</button>
   </div>
-
-  <div id="status"></div>
+  <div id="jobs-status"></div>
   <div id="jobs"><div class="empty">Loading...</div></div>
 </div>
 
-<script>
-var allJobs = [], activeFilter = 'all';
-var TITLES = "Associate Product Manager (medical device), Product Manager (medical device), Medical Science Liaison, Sales Force Enablement / Training, Client Success Manager, Clinical Education Specialist, Staff Sales Operations Analyst, Customer Success / Account Manager";
-var COMPANIES = "BD, Arthrex, Stryker, Medtronic, Biotronik, Abbott, Zimmer Biomet, Boston Scientific, Insulet, Edwards Lifesciences, DePuy Synthes, Dexcom, Intuitive Surgical, Smith & Nephew, Globus Medical, Synergy Spine Solutions, Gore, Personify Health, Prompt AI, Ambience Healthcare, Limber Health";
-var LS_KEY = 'ashley_job_board_api_key';
+<!-- CHAT TAB -->
+<div id="tab-chat" class="page">
+  <p class="chat-hint">Ask me anything about your job listings, interview tips, companies, how to position your PT background, salary negotiation, or anything else.</p>
+  <div class="chat-wrap">
+    <div class="chat-msgs" id="chat-msgs">
+      <div class="msg assistant">Hi Ashley! I'm here to help with your job search. I have context on your current listings and your background as a DPT/OCS Clinic Director. What would you like to know?</div>
+    </div>
+    <div class="chat-input-row">
+      <textarea id="chat-input" placeholder="Ask about a company, how to position your PT background, salary ranges, interview tips..." onkeydown="chatKeydown(event)"></textarea>
+      <button class="chat-send" id="chat-send" onclick="sendChat()">Send</button>
+    </div>
+  </div>
+</div>
 
-var MESSAGES = [
-  { icon: '🌟', title: "Your clinical expertise is your superpower.", body: "15 years of patient outcomes, team leadership, and real-world ortho knowledge — that's exactly what med-device companies are looking for." },
-  { icon: '💪', title: "Every application is a rep.", body: "The more you put out there, the stronger your job-search muscle gets. Keep showing up — it compounds." },
-  { icon: '🎯', title: "You're not starting over. You're leveling up.", body: "A career pivot with your background isn't a step back — it's bringing a decade and a half of hard-won insight to a brand new arena." },
-  { icon: '💡', title: "Informational interviews open doors.", body: "Reach out to one MSL or clinical educator today on LinkedIn. A 20-minute conversation can move faster than 20 applications." },
-  { icon: '✨', title: "Your DPT + OCS combination is rare in industry.", body: "Most candidates don't have your clinical credibility. Lead with it — in your cover letter, your LinkedIn, and every conversation." },
-  { icon: '📈', title: "Consistency beats intensity.", body: "Checking this board every morning and applying to 2–3 strong fits per week will outperform a frantic weekend blitz every time." },
-  { icon: '🤝', title: "Your network is bigger than you think.", body: "Former colleagues, PT students you mentored, physicians you collaborated with — let them know you're looking. Referrals land interviews." },
-  { icon: '🏆', title: "Clinic director is a serious credential.", body: "P&L ownership, hiring, budget management, performance metrics — you've done it all. That's not just a PT background, that's business leadership." },
-  { icon: '🌍', title: "The med-device world needs people like you.", body: "Companies spend millions training reps and MSLs who have never treated a patient. You already speak the language clinicians trust." },
-  { icon: '🔥', title: "Rejection is redirection.", body: "Every 'not this time' is narrowing the field toward the role that's actually the right fit. Keep going." },
-  { icon: '📝', title: "Tailor one application today.", body: "A cover letter that speaks directly to the job description outperforms a generic one every time. Take 15 minutes to make it specific." },
-  { icon: '🧠', title: "You understand the buyer better than anyone.", body: "PT and ortho surgeons are major customers for med-device companies. Your relationships and clinical fluency are worth real revenue to them." },
-  { icon: '⚡', title: "Small steps, big momentum.", body: "You don't have to have it all figured out today. Apply to one job, send one message, take one step. That's how it happens." },
-  { icon: '🏗', title: "You've already built something from nothing.", body: "You took a struggling clinic and grew it to 9 clinicians with 85% less contract labor. That's a story that sells itself in any industry interview." },
+<!-- RESUME TAB -->
+<div id="tab-resume" class="page">
+  <div class="resume-wrap">
+    <div>
+      <div class="section-label">Your base resume</div>
+      <textarea class="big" id="resume-text" placeholder="Paste your full resume here. It will be saved automatically and used to tailor to specific jobs." oninput="saveResume()" style="min-height:200px;"></textarea>
+    </div>
+    <div>
+      <div class="section-label">Select a job to tailor for</div>
+      <select class="job-select" id="job-select">
+        <option value="">— refresh jobs first, then select a listing —</option>
+      </select>
+    </div>
+    <div>
+      <div class="section-label">What to generate</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <button class="action-btn" onclick="tailorResume()">&#10024; Tailor resume</button>
+        <button class="action-btn sec" onclick="generateCover()">&#128221; Write cover letter</button>
+        <button class="action-btn sec" onclick="generateTalkingPoints()">&#127775; Talking points</button>
+      </div>
+    </div>
+    <div id="resume-loading" style="display:none"><div class="loading"><div class="spinner"></div>Generating...</div></div>
+    <div id="resume-result-wrap" style="display:none;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+        <div class="section-label" id="resume-result-label">Result</div>
+        <button class="action-btn sec" style="padding:3px 10px;font-size:10px;" onclick="copyResult()">Copy</button>
+      </div>
+      <div class="result-box" id="resume-result"></div>
+    </div>
+  </div>
+</div>
+
+<!-- TRACKER TAB -->
+<div id="tab-tracker" class="page">
+  <div class="stats-row" id="stats-row"></div>
+  <div class="tracker-header">
+    <h2>Applications</h2>
+    <button class="action-btn sec" style="font-size:11px;padding:4px 12px;" onclick="exportTracker()">Export CSV</button>
+  </div>
+  <div id="tracker-wrap"></div>
+</div>
+
+<script>
+var allJobs=[],activeFilter='all',chatHistory=[],applied={};
+var TITLES="Associate Product Manager (medical device), Product Manager (medical device), Medical Science Liaison, Sales Force Enablement / Training, Client Success Manager, Clinical Education Specialist, Staff Sales Operations Analyst, Customer Success / Account Manager";
+var COMPANIES="BD, Arthrex, Stryker, Medtronic, Biotronik, Abbott, Zimmer Biomet, Boston Scientific, Insulet, Edwards Lifesciences, DePuy Synthes, Dexcom, Intuitive Surgical, Smith & Nephew, Globus Medical, Synergy Spine Solutions, Gore, Personify Health, Prompt AI, Ambience Healthcare, Limber Health";
+var LS_KEY='ashley_api_key', LS_RESUME='ashley_resume', LS_TRACKER='ashley_tracker';
+var ASHLEY_BIO="Ashley Stadler PT, DPT, OCS. 15 years as a Physical Therapist. Currently Clinic Director at Banner Physical Therapy in Mesa AZ (since Nov 2023) — grew clinic from 2 to 9 clinicians, reduced contract labor by 85%, managed P&L and full clinic budget with consistent profitability above budget. Previously Staff PT and Patient Engagement Specialist at Banner PT (2019-2023), Staff PT and CCCE at Select Physical Therapy (2010-2016). Education: DPT from Northern Arizona University, BS Exercise Science magna cum laude from University of New Mexico. Certifications: Licensed PT since 2010, OCS 2013-2023, Graston certified, Credentialed Clinical Instructor. She is pivoting from clinical PT to medical device / health-tech industry roles.";
+
+var MESSAGES=[
+  {icon:'🌟',title:"Your clinical expertise is your superpower.",body:"15 years of patient outcomes, team leadership, and real-world ortho knowledge — that's exactly what med-device companies need."},
+  {icon:'💪',title:"Every application is a rep.",body:"The more you put out there, the stronger your job-search muscle gets. Keep showing up — it compounds."},
+  {icon:'🎯',title:"You're not starting over. You're leveling up.",body:"A career pivot with your background isn't a step back — it's bringing a decade of hard-won insight to a brand new arena."},
+  {icon:'💡',title:"Informational interviews open doors.",body:"Reach out to one MSL or clinical educator on LinkedIn today. A 20-minute call can move faster than 20 applications."},
+  {icon:'✨',title:"Your DPT + OCS combination is rare in industry.",body:"Most candidates don't have your clinical credibility. Lead with it in every cover letter and conversation."},
+  {icon:'📈',title:"Consistency beats intensity.",body:"Checking this board every morning and applying to 2-3 strong fits per week outperforms a frantic weekend blitz every time."},
+  {icon:'🤝',title:"Your network is bigger than you think.",body:"Former colleagues, PT students you mentored, physicians you worked with — let them know you're looking. Referrals land interviews."},
+  {icon:'🏆',title:"Clinic director is a serious credential.",body:"P&L ownership, hiring, budget management, metrics — you've done it all. That's business leadership, not just a PT background."},
+  {icon:'🌍',title:"The med-device world needs people like you.",body:"Companies spend millions training reps and MSLs who never treated a patient. You already speak the language clinicians trust."},
+  {icon:'🔥',title:"Rejection is redirection.",body:"Every 'not this time' narrows the field toward the role that's actually the right fit. Keep going."},
+  {icon:'📝',title:"Tailor one application today.",body:"A cover letter that speaks to the specific job outperforms a generic one every time. Take 15 minutes to make it specific."},
+  {icon:'🧠',title:"You understand the buyer better than anyone.",body:"PT and ortho surgeons are major med-device customers. Your relationships and clinical fluency are worth real revenue to them."},
+  {icon:'⚡',title:"Small steps, big momentum.",body:"Apply to one job, send one message, take one step. That's how careers change."},
+  {icon:'🏗',title:"You've already built something from nothing.",body:"You grew a struggling clinic to 9 clinicians with 85% less contract labor. That story sells itself in any industry interview."},
 ];
 
-function showMotd() {
-  var m = MESSAGES[new Date().getDay() % MESSAGES.length];
-  document.getElementById('motd-icon').textContent = m.icon;
-  document.getElementById('motd-title').textContent = m.title;
-  document.getElementById('motd-body').textContent = m.body;
-}
+function showMotd(){var m=MESSAGES[new Date().getDay()%MESSAGES.length];document.getElementById('motd-icon').textContent=m.icon;document.getElementById('motd-title').textContent=m.title;document.getElementById('motd-body').textContent=m.body;}
 
-function loadSavedKey() {
-  var saved = localStorage.getItem(LS_KEY);
-  if (saved) {
-    document.getElementById('apikey').value = saved;
-    document.getElementById('saved-badge').style.display = '';
-    document.getElementById('clear-btn').style.display = '';
-    document.getElementById('api-note').textContent = 'Key saved to this browser. Click "forget" to remove it.';
-    fetchJobs();
-  } else {
-    document.getElementById('jobs').innerHTML = '<div class="empty">Enter your API key above and click ↻ Refresh to get started.</div>';
-  }
-}
+function showTab(tab,btn){document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});document.querySelectorAll('.tab').forEach(function(b){b.classList.remove('active');});document.getElementById('tab-'+tab).classList.add('active');btn.classList.add('active');if(tab==='tracker')renderTracker();if(tab==='resume')populateJobSelect();}
 
-function onKeyInput() {
-  var key = document.getElementById('apikey').value.trim();
-  if (key) {
-    localStorage.setItem(LS_KEY, key);
-    document.getElementById('saved-badge').style.display = '';
-    document.getElementById('clear-btn').style.display = '';
-    document.getElementById('api-note').textContent = 'Key saved to this browser. Click "forget" to remove it.';
-  }
-}
+function getKey(){return document.getElementById('apikey').value.trim();}
 
-function clearKey() {
-  localStorage.removeItem(LS_KEY);
-  document.getElementById('apikey').value = '';
-  document.getElementById('saved-badge').style.display = 'none';
-  document.getElementById('clear-btn').style.display = 'none';
-  document.getElementById('api-note').textContent = 'Enter your key once and it will be saved to this browser.';
-  document.getElementById('jobs').innerHTML = '<div class="empty">Enter your API key above and click ↻ Refresh to get started.</div>';
-}
+function loadSavedKey(){var s=localStorage.getItem(LS_KEY);if(s){document.getElementById('apikey').value=s;document.getElementById('saved-badge').style.display='';document.getElementById('clear-btn').style.display='';document.getElementById('api-note').textContent='Key saved. Click "forget" to remove.';fetchJobs();}else{document.getElementById('jobs').innerHTML='<div class="empty">Enter your API key above and click ↻ Refresh to get started.</div>';}}
+function onKeyInput(){var k=document.getElementById('apikey').value.trim();if(k){localStorage.setItem(LS_KEY,k);document.getElementById('saved-badge').style.display='';document.getElementById('clear-btn').style.display='';document.getElementById('api-note').textContent='Key saved. Click "forget" to remove.';}}
+function clearKey(){localStorage.removeItem(LS_KEY);document.getElementById('apikey').value='';document.getElementById('saved-badge').style.display='none';document.getElementById('clear-btn').style.display='none';document.getElementById('jobs').innerHTML='<div class="empty">Enter your API key above and click ↻ Refresh to get started.</div>';}
 
-function catLabel(c) { return ({ product: 'Product / APM', msl: 'MSL', sales: 'Sales / enablement', cs: 'Client success', clinical: 'Clinical ed', ops: 'Sales ops' })[c] || c; }
-function escHtml(s) { if (!s) return ''; return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+function catLabel(c){return({product:'Product / APM',msl:'MSL',sales:'Sales / enablement',cs:'Client success',clinical:'Clinical ed',ops:'Sales ops'})[c]||c;}
+function escHtml(s){if(!s)return'';return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function setFilter(f,btn){activeFilter=f;document.querySelectorAll('.fb').forEach(function(b){b.classList.remove('active');});btn.classList.add('active');renderJobs();}
 
-function setFilter(f, btn) {
-  activeFilter = f;
-  document.querySelectorAll('.fb').forEach(function(b) { b.classList.remove('active'); });
-  btn.classList.add('active');
-  renderJobs();
-}
+function loadTracker(){try{var s=localStorage.getItem(LS_TRACKER);applied=s?JSON.parse(s):{};} catch(e){applied={};}}
+function saveTracker(){localStorage.setItem(LS_TRACKER,JSON.stringify(applied));}
+function trackerCount(){return Object.keys(applied).length;}
+function updateTrackerBadge(){var n=trackerCount();var el=document.getElementById('tracker-cnt');if(n>0){el.style.display='';el.textContent=n;}else{el.style.display='none';}}
 
-function renderJobs() {
-  var c = document.getElementById('jobs'), el = document.getElementById('cnt'), list = allJobs;
-  if (activeFilter === 'remote') list = allJobs.filter(function(j) { return j.isRemote; });
-  else if (activeFilter !== 'all') list = allJobs.filter(function(j) { return j.category === activeFilter; });
-  el.style.display = '';
-  el.textContent = list.length + ' jobs';
-  if (!list.length) { c.innerHTML = '<div class="empty">No listings matched this filter.</div>'; return; }
-  c.innerHTML = list.map(function(j) {
-    return '<div class="card"><div class="jtitle">' + escHtml(j.title) + '</div>' +
-      '<div class="jco">' + escHtml(j.company) + '</div>' +
-      '<div class="badges">' +
-        '<span class="badge bp">' + catLabel(j.category) + '</span>' +
-        '<span class="badge bl">' + escHtml(j.location) + '</span>' +
-        (j.isRemote ? '<span class="badge bg">Remote</span>' : '') +
-        (j.source ? '<span class="badge bs">' + escHtml(j.source) + '</span>' : '') +
-        (j.posted ? '<span class="badge bdate">' + escHtml(j.posted) + '</span>' : '') +
-        (j.salary ? '<span class="badge bs">' + escHtml(j.salary) + '</span>' : '') +
-      '</div>' +
-      '<div class="jsumm">' + escHtml(j.summary) + '</div>' +
-      (j.url ? '<a class="jlink" href="' + escHtml(j.url) + '" target="_blank">View listing →</a>' : '') +
+function addToTracker(job){var id=job.title+'|'+job.company;if(!applied[id]){applied[id]={title:job.title,company:job.company,location:job.location,url:job.url||'',status:'Applied',notes:'',date:new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}),category:job.category};}saveTracker();updateTrackerBadge();renderJobs();}
+
+function renderJobs(){
+  var c=document.getElementById('jobs'),list=allJobs;
+  if(activeFilter==='remote')list=allJobs.filter(function(j){return j.isRemote;});
+  else if(activeFilter!=='all')list=allJobs.filter(function(j){return j.category===activeFilter;});
+  var cnt=document.querySelector('#tab-jobs .cnt')||null;
+  if(!list.length){c.innerHTML='<div class="empty">No listings matched this filter.</div>';return;}
+  c.innerHTML=list.map(function(j){
+    var id=j.title+'|'+j.company;
+    var inTracker=!!applied[id];
+    return '<div class="card">'+
+      '<div class="card-top">'+
+        '<div><div class="jtitle">'+escHtml(j.title)+'</div><div class="jco">'+escHtml(j.company)+'</div></div>'+
+        '<div class="card-actions">'+
+          '<button class="btn-sm" onclick="askAboutJob('+JSON.stringify(JSON.stringify(j))+')">Ask Claude</button>'+
+          '<button class="btn-sm" onclick="tailorFor('+JSON.stringify(JSON.stringify(j))+')">Tailor resume</button>'+
+          (inTracker
+            ? '<button class="btn-sm success" disabled>&#10003; Tracking</button>'
+            : '<button class="btn-sm primary" onclick="addToTracker('+JSON.stringify(JSON.stringify(j))+')">+ Track</button>'
+          )+
+        '</div>'+
+      '</div>'+
+      '<div class="badges">'+
+        '<span class="badge bp">'+catLabel(j.category)+'</span>'+
+        '<span class="badge bl">'+escHtml(j.location)+'</span>'+
+        (j.isRemote?'<span class="badge bg">Remote</span>':'')+
+        (j.source?'<span class="badge bs">'+escHtml(j.source)+'</span>':'')+
+        (j.posted?'<span class="badge bdate">'+escHtml(j.posted)+'</span>':'')+
+        (j.salary?'<span class="badge bs">'+escHtml(j.salary)+'</span>':'')+
+      '</div>'+
+      '<div class="jsumm">'+escHtml(j.summary)+'</div>'+
+      (j.url?'<a class="jlink" href="'+escHtml(j.url)+'" target="_blank">View listing →</a>':'')+
     '</div>';
   }).join('');
 }
 
-function showError(msg, detail) {
-  document.getElementById('jobs').innerHTML = '';
-  document.getElementById('status').innerHTML = '<div class="errmsg">' + escHtml(msg) + (detail ? '<br><small>' + escHtml(detail) + '</small>' : '') + '</div>';
-}
+function showJobsError(msg){document.getElementById('jobs').innerHTML='<div class="errmsg">'+escHtml(msg)+'</div>';}
 
-function fetchJobs() {
-  var key = document.getElementById('apikey').value.trim();
-  if (!key) { showError('Please enter your Anthropic API key above first.', ''); return; }
-  var btn = document.getElementById('rbtn');
-  btn.disabled = true; btn.textContent = 'Searching...';
-  document.getElementById('status').innerHTML = '';
-  document.getElementById('jobs').innerHTML = '<div class="loading"><div class="spinner"></div>Searching Indeed, LinkedIn, ZipRecruiter & more...</div>';
-  document.getElementById('cnt').style.display = 'none';
+function fetchJobs(){
+  var key=getKey();if(!key){showJobsError('Please enter your Anthropic API key above first.');return;}
+  var btn=document.getElementById('rbtn');btn.disabled=true;btn.textContent='Searching...';
+  document.getElementById('jobs-status').innerHTML='';
+  document.getElementById('jobs').innerHTML='<div class="loading"><div class="spinner"></div>Searching Indeed, LinkedIn, ZipRecruiter & more...</div>';
+  var today=new Date().toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  var prompt='Today is '+today+'. Search for current job openings matching this profile and return ONLY a JSON array.
 
-  var today = new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+BACKGROUND: '+ASHLEY_BIO+'
 
-  var prompt = 'Today is ' + today + '. Search for current job openings matching Ashley's profile and return them as a JSON array.
+SEARCH: Indeed, LinkedIn Jobs, ZipRecruiter, Glassdoor, and company career pages.
 
-ASHLEY'S BACKGROUND: Licensed PT (DPT, OCS), 15 years experience, currently Clinic Director at Banner PT in Mesa AZ. She is pivoting to medical device / health-tech industry. Key skills: orthopedic/MSK clinical expertise, P&L management, team building (grew clinic from 2 to 9 clinicians, cut contract labor 85%), clinical instruction, patient engagement strategy.
+TITLES: '+TITLES+'
+COMPANIES: '+COMPANIES+'
+LOCATION: Phoenix/Mesa/Gilbert/Chandler/Scottsdale AZ metro OR remote-eligible for AZ candidates.
 
-SEARCH THESE SITES: Indeed (indeed.com), LinkedIn Jobs (linkedin.com/jobs), ZipRecruiter (ziprecruiter.com), Glassdoor (glassdoor.com), and direct company career pages.
-
-TARGET JOB TITLES: ' + TITLES + '
-
-TARGET COMPANIES (prioritize but not limited to): ' + COMPANIES + '
-
-LOCATION: Phoenix/Mesa/Gilbert/Chandler/Scottsdale AZ metro area, OR remote-eligible positions open to AZ-based candidates.
-
-RULES:
-1. Search the sites above and find 8-12 real current job listings.
-2. Prioritize the most recently posted jobs.
-3. You MUST return a JSON array. Do not write any explanation, apology, or prose — ONLY the JSON array.
-4. If you cannot find jobs matching all criteria, broaden the search slightly and return the closest matches.
-5. Every field in the JSON must be a string or boolean — never leave fields undefined.
-
-RETURN ONLY this raw JSON array with absolutely no other text before or after it:
-[{"title":"job title","company":"company name","location":"city, state or Remote","salary":"range or null","source":"Indeed or LinkedIn or ZipRecruiter or Glassdoor or Company Site","posted":"Posted today or 1 day ago or 2 days ago or this week","summary":"2-3 sentences on the role and why it fits Ashley given her PT and clinic director background","url":"https://link or null","isRemote":false,"category":"product or msl or sales or cs or clinical or ops"}]';
-
-  fetch('https://api.anthropic.com/v1/messages', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'x-api-key': key, 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true' },
-    body: JSON.stringify({
-      model: 'claude-sonnet-4-20250514',
-      max_tokens: 4000,
-      tools: [{ type: 'web_search_20250305', name: 'web_search' }],
-      messages: [{ role: 'user', content: prompt }]
-    })
-  })
-  .then(function(r) { if (!r.ok) return r.text().then(function(t) { throw new Error('HTTP ' + r.status + ': ' + t); }); return r.json(); })
-  .then(function(d) {
-    if (d.error) throw new Error(d.error.message);
-    var raw = '';
-    (d.content || []).forEach(function(b) { if (b.type === 'text') raw += b.text; });
-    raw = raw.replace(/```json|```/g, '').trim();
-    var s = raw.indexOf('['), e = raw.lastIndexOf(']');
-    if (s < 0 || e < 0) throw new Error('Job search completed but no listings were returned. Please try refreshing in a moment.');
-    allJobs = JSON.parse(raw.slice(s, e + 1));
-    if (!allJobs.length) throw new Error('No matching jobs found right now — try refreshing in a few minutes.');
-    var now = new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
-    document.getElementById('subtitle').textContent = 'Last refreshed ' + now + ' · ' + today;
+Find 8-12 real current listings. Prioritize the most recently posted. You MUST return a JSON array — no explanation, no apology, ONLY the array:
+[{"title":"...","company":"...","location":"...","salary":"...or null","source":"Indeed/LinkedIn/etc","posted":"Posted today/1 day ago/this week","summary":"2-3 sentences on role fit for Ashley","url":"...or null","isRemote":false,"category":"product or msl or sales or cs or clinical or ops"}]';
+  callClaude(prompt,true).then(function(raw){
+    var s=raw.indexOf('['),e=raw.lastIndexOf(']');
+    if(s<0||e<0)throw new Error('No job listings returned. Please try refreshing.');
+    allJobs=JSON.parse(raw.slice(s,e+1));
+    if(!allJobs.length)throw new Error('No matching jobs found right now — try refreshing in a few minutes.');
+    document.getElementById('topbar-sub').textContent='Last refreshed '+new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'})+' · '+today;
+    populateJobSelect();
     renderJobs();
-  })
-  .catch(function(err) { showError('Could not load listings — please try refreshing.', err.message); })
-  .finally(function() { btn.disabled = false; btn.textContent = '↻ Refresh'; });
+  }).catch(function(err){showJobsError('Could not load listings — please try refreshing. '+err.message);})
+  .finally(function(){btn.disabled=false;btn.textContent='↻ Refresh';});
 }
 
-window.addEventListener('load', function() { showMotd(); loadSavedKey(); });
+function callClaude(prompt,useSearch,systemPrompt){
+  var key=getKey();if(!key)return Promise.reject(new Error('No API key'));
+  var body={model:'claude-sonnet-4-20250514',max_tokens:4000,messages:[{role:'user',content:prompt}]};
+  if(useSearch)body.tools=[{type:'web_search_20250305',name:'web_search'}];
+  if(systemPrompt)body.system=systemPrompt;
+  return fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify(body)})
+  .then(function(r){if(!r.ok)return r.text().then(function(t){throw new Error('HTTP '+r.status+': '+t);});return r.json();})
+  .then(function(d){if(d.error)throw new Error(d.error.message);var raw='';(d.content||[]).forEach(function(b){if(b.type==='text')raw+=b.text;});return raw.replace(/```json|```/g,'').trim();});
+}
+
+/* --- CHAT --- */
+function chatKeydown(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendChat();}}
+function appendMsg(role,text){var d=document.createElement('div');d.className='msg '+role;d.textContent=text;document.getElementById('chat-msgs').appendChild(d);d.scrollIntoView({behavior:'smooth'});}
+function appendMsgHTML(role,html){var d=document.createElement('div');d.className='msg '+role;d.innerHTML=html;document.getElementById('chat-msgs').appendChild(d);d.scrollIntoView({behavior:'smooth'});}
+
+function sendChat(){
+  var input=document.getElementById('chat-input'),btn=document.getElementById('chat-send');
+  var text=input.value.trim();if(!text)return;
+  if(!getKey()){appendMsg('assistant','Please enter your API key on the Jobs tab first.');return;}
+  input.value='';btn.disabled=true;
+  appendMsg('user',text);
+  chatHistory.push({role:'user',content:text});
+  var thinking=document.createElement('div');thinking.className='msg assistant';thinking.textContent='Thinking...';document.getElementById('chat-msgs').appendChild(thinking);thinking.scrollIntoView({behavior:'smooth'});
+  var jobContext=allJobs.length?'Current job listings Ashley is considering:
+'+allJobs.map(function(j){return '- '+j.title+' at '+j.company+' ('+j.location+'): '+j.summary;}).join('
+'):'No job listings loaded yet (she can refresh the Jobs tab).';
+  var sys='You are Ashley's personal career coach and job search assistant. You are warm, encouraging, and direct.
+
+ASHLEY'S BACKGROUND: '+ASHLEY_BIO+'
+
+'+jobContext+'
+
+Help Ashley with questions about her job search, companies, interview prep, salary negotiation, how to position her PT background for industry roles, or anything else. Be specific and actionable.';
+  var msgs=chatHistory.slice(-10);
+  var key=getKey();
+  fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1500,system:sys,messages:msgs})})
+  .then(function(r){if(!r.ok)return r.text().then(function(t){throw new Error('HTTP '+r.status);});return r.json();})
+  .then(function(d){var reply='';(d.content||[]).forEach(function(b){if(b.type==='text')reply+=b.text;});thinking.remove();chatHistory.push({role:'assistant',content:reply});appendMsg('assistant',reply);})
+  .catch(function(err){thinking.remove();appendMsg('assistant','Sorry, something went wrong: '+err.message);})
+  .finally(function(){btn.disabled=false;});
+}
+
+function askAboutJob(jobJson){
+  var job=JSON.parse(jobJson);
+  showTab('chat',document.querySelectorAll('.tab')[1]);
+  var q='Tell me about the '+job.title+' role at '+job.company+'. What should I know about this company, and how should I position my PT and clinic director background for this specific role?';
+  document.getElementById('chat-input').value=q;
+  sendChat();
+}
+
+/* --- RESUME TAILOR --- */
+function saveResume(){localStorage.setItem(LS_RESUME,document.getElementById('resume-text').value);}
+function loadResume(){var r=localStorage.getItem(LS_RESUME);if(r)document.getElementById('resume-text').value=r;}
+function populateJobSelect(){
+  var sel=document.getElementById('job-select');
+  var cur=sel.value;
+  sel.innerHTML='<option value="">— select a job listing —</option>';
+  allJobs.forEach(function(j,i){var o=document.createElement('option');o.value=i;o.textContent=j.title+' @ '+j.company;sel.appendChild(o);});
+  if(cur)sel.value=cur;
+}
+function tailorFor(jobJson){
+  var job=JSON.parse(jobJson);
+  loadResume();
+  showTab('resume',document.querySelectorAll('.tab')[2]);
+  setTimeout(function(){
+    populateJobSelect();
+    var sel=document.getElementById('job-select');
+    for(var i=0;i<allJobs.length;i++){if(allJobs[i].title===job.title&&allJobs[i].company===job.company){sel.value=i;break;}}
+    if(!document.getElementById('resume-text').value){alert('Please paste your resume in the Resume Tailor tab first!');}
+    else{tailorResume();}
+  },100);
+}
+function getSelectedJob(){var v=document.getElementById('job-select').value;return v!==''?allJobs[parseInt(v)]:null;}
+function showResumeResult(label,text){document.getElementById('resume-result-label').textContent=label;document.getElementById('resume-result').textContent=text;document.getElementById('resume-result-wrap').style.display='';document.getElementById('resume-loading').style.display='none';}
+
+function tailorResume(){
+  var resume=document.getElementById('resume-text').value.trim();
+  var job=getSelectedJob();
+  if(!resume){alert('Please paste your resume first.');return;}
+  if(!job){alert('Please select a job listing.');return;}
+  document.getElementById('resume-result-wrap').style.display='none';
+  document.getElementById('resume-loading').style.display='';
+  var prompt='Ashley is applying for: '+job.title+' at '+job.company+' ('+job.location+').
+
+Job summary: '+job.summary+'
+
+Here is her current resume:
+
+'+resume+'
+
+Please rewrite and tailor her resume specifically for this role. Emphasize the most relevant experience, skills, and accomplishments that align with this '+job.title+' position. Highlight her clinical expertise, P&L management, team leadership, and patient engagement work in ways that resonate with a med-device/health-tech hiring manager. Keep it to 1 page worth of content. Return only the tailored resume text, no explanations.';
+  callClaude(prompt,false).then(function(r){showResumeResult('Tailored resume for '+job.title+' @ '+job.company,r);}).catch(function(err){document.getElementById('resume-loading').style.display='none';alert('Error: '+err.message);});
+}
+
+function generateCover(){
+  var resume=document.getElementById('resume-text').value.trim();
+  var job=getSelectedJob();
+  if(!resume){alert('Please paste your resume first.');return;}
+  if(!job){alert('Please select a job listing.');return;}
+  document.getElementById('resume-result-wrap').style.display='none';
+  document.getElementById('resume-loading').style.display='';
+  var prompt='Write a compelling, personalized cover letter for Ashley Stadler applying for the '+job.title+' position at '+job.company+'.
+
+Job summary: '+job.summary+'
+
+Ashley's background: '+ASHLEY_BIO+'
+
+Her resume:
+'+resume+'
+
+Write a cover letter that: (1) Opens with a strong hook about her clinical-to-industry transition, (2) Highlights 2-3 specific accomplishments most relevant to this role, (3) Shows genuine interest in this company specifically, (4) Closes confidently. Keep it to 3-4 paragraphs. Professional but warm tone. Return only the cover letter.';
+  callClaude(prompt,false).then(function(r){showResumeResult('Cover letter for '+job.title+' @ '+job.company,r);}).catch(function(err){document.getElementById('resume-loading').style.display='none';alert('Error: '+err.message);});
+}
+
+function generateTalkingPoints(){
+  var job=getSelectedJob();
+  if(!job){alert('Please select a job listing.');return;}
+  document.getElementById('resume-result-wrap').style.display='none';
+  document.getElementById('resume-loading').style.display='';
+  var prompt='Ashley ('+ASHLEY_BIO+') has an interview for '+job.title+' at '+job.company+'.
+
+Job: '+job.summary+'
+
+Create concise interview talking points for her:
+1. How to open (elevator pitch for the role)
+2. 3 strongest stories from her background for this role (STAR format)
+3. Questions she should ask them
+4. Potential tough questions and how to answer them
+
+Be specific to her PT/clinic director background and this exact role.';
+  callClaude(prompt,false).then(function(r){showResumeResult('Interview talking points: '+job.title+' @ '+job.company,r);}).catch(function(err){document.getElementById('resume-loading').style.display='none';alert('Error: '+err.message);});
+}
+
+function copyResult(){navigator.clipboard.writeText(document.getElementById('resume-result').textContent).then(function(){alert('Copied to clipboard!');});}
+
+/* --- TRACKER --- */
+var STATUS_OPTS=['Applied','Phone Screen','Interview','Offer','Rejected'];
+var STATUS_CLS={Applied:'status-applied','Phone Screen':'status-screen',Interview:'status-interview',Offer:'status-offer',Rejected:'status-rejected'};
+
+function renderTracker(){
+  loadTracker();updateTrackerBadge();
+  var wrap=document.getElementById('tracker-wrap');
+  var keys=Object.keys(applied);
+  var stats={Applied:0,'Phone Screen':0,Interview:0,Offer:0,Rejected:0};
+  keys.forEach(function(k){var s=applied[k].status;if(stats[s]!==undefined)stats[s]++;});
+  document.getElementById('stats-row').innerHTML=[
+    {l:'Total',v:keys.length},{l:'Active',v:stats['Applied']+stats['Phone Screen']+stats['Interview']},
+    {l:'Interviews',v:stats['Interview']},{l:'Offers',v:stats['Offer']},{l:'Rejected',v:stats['Rejected']}
+  ].map(function(s){return '<div class="stat-card"><div class="num">'+s.v+'</div><div class="lbl">'+s.l+'</div></div>';}).join('');
+  if(!keys.length){wrap.innerHTML='<div class="tracker-empty">No applications tracked yet.<br>Hit "+ Track" on any job listing to add it here.</div>';return;}
+  var rows=keys.map(function(k){
+    var j=applied[k];
+    var opts=STATUS_OPTS.map(function(o){return '<option value="'+o+'"'+(j.status===o?' selected':'')+'>'+o+'</option>';}).join('');
+    return '<tr>'+
+      '<td><strong>'+escHtml(j.title)+'</strong><br><span style="color:#888780">'+escHtml(j.company)+'</span></td>'+
+      '<td>'+escHtml(j.location||'')+'</td>'+
+      '<td>'+escHtml(j.date||'')+'</td>'+
+      '<td><select class="status-select '+STATUS_CLS[j.status]+'" onchange="updateStatus(''+k.replace(/'/g,"\'")+"','this.value')">"+opts+'</select></td>'+
+      '<td><input class="notes-input" value="'+escHtml(j.notes||'')+'" placeholder="Notes..." onchange="updateNotes(''+k.replace(/'/g,"\'")+'',this.value)"></td>'+
+      '<td>'+(j.url?'<a href="'+escHtml(j.url)+'" target="_blank" style="font-size:10px;color:#185FA5;">View</a>':'')+'</td>'+
+      '<td><button class="del-btn" onclick="removeFromTracker(''+k.replace(/'/g,"\'")+"')">&#215;</button></td>"+
+    '</tr>';
+  }).join('');
+  wrap.innerHTML='<table class="tracker-table"><thead><tr><th>Role</th><th>Location</th><th>Applied</th><th>Status</th><th>Notes</th><th>Link</th><th></th></tr></thead><tbody>'+rows+'</tbody></table>';
+}
+
+function updateStatus(key,valExpr){var v=event.target.value;applied[key].status=v;event.target.className='status-select '+(STATUS_CLS[v]||'');saveTracker();}
+function updateNotes(key,val){applied[key].notes=val;saveTracker();}
+function removeFromTracker(key){if(confirm('Remove this application from your tracker?')){delete applied[key];saveTracker();updateTrackerBadge();renderTracker();}}
+
+function exportTracker(){
+  var rows=[['Title','Company','Location','Date Applied','Status','Notes','URL']];
+  Object.values(applied).forEach(function(j){rows.push([j.title,j.company,j.location||'',j.date||'',j.status,j.notes||'',j.url||'']);});
+  var csv=rows.map(function(r){return r.map(function(c){return '"'+String(c).replace(/"/g,'""')+'"';}).join(',');}).join('
+');
+  var a=document.createElement('a');a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);a.download='ashley_applications.csv';a.click();
+}
+
+window.addEventListener('load',function(){showMotd();loadTracker();updateTrackerBadge();loadResume();loadSavedKey();});
 </script>
 </body>
 </html>
