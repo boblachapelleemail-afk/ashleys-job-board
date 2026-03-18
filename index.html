@@ -9,169 +9,118 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#F5F3EE;--s:#FFF;--s2:#F0EEE9;--bd:#E5E2DB;
-  --tx:#1C1917;--t2:#78716C;--t3:#A8A29E;
-  --gn:#166534;--gbg:#DCFCE7;--gt:#14532D;
-  --am:#92400E;--abg:#FEF3C7;
-  --bl:#1E40AF;--bbg:#DBEAFE;
-  --pu:#5B21B6;--pbg:#EDE9FE;
-  --sh:0 1px 2px rgba(0,0,0,.06),0 1px 3px rgba(0,0,0,.04);
-  --r:12px;--rs:8px;--rx:6px;
-}
-*{box-sizing:border-box;margin:0;padding:0;}
-html{-webkit-font-smoothing:antialiased;}
-body{font-family:"DM Sans",sans-serif;background:var(--bg);color:var(--tx);min-height:100vh;font-size:14px;line-height:1.5;}
-
-/* ── TOPBAR ── */
-.topbar{background:var(--s);border-bottom:1px solid var(--bd);box-shadow:var(--sh);position:sticky;top:0;z-index:100;}
-.topbar-row1{display:flex;align-items:center;justify-content:space-between;padding:0 1.25rem;height:52px;gap:12px;}
-.brand{display:flex;align-items:center;gap:8px;min-width:0;flex-shrink:0;}
-.brand-icon{width:28px;height:28px;background:linear-gradient(135deg,#14532D,#166534);border-radius:7px;display:flex;align-items:center;justify-content:center;color:white;font-size:13px;flex-shrink:0;}
-.brand-name{font-size:14px;font-weight:600;letter-spacing:-.02em;white-space:nowrap;}
-.brand-sub{font-size:10px;color:var(--t3);white-space:nowrap;}
-.tabs-desktop{display:flex;gap:2px;background:var(--s2);border-radius:9px;padding:3px;border:1px solid var(--bd);}
-.tab{padding:6px 14px;font-size:12px;font-weight:500;border:none;background:transparent;border-radius:6px;cursor:pointer;color:var(--t2);white-space:nowrap;font-family:"DM Sans",sans-serif;transition:background .12s,color .12s;}
-.tab:hover{color:var(--tx);background:rgba(0,0,0,.04);}
-.tab.active{background:var(--s);color:var(--tx);box-shadow:var(--sh);font-weight:600;}
-/* mobile tabs row — hidden on desktop */
-.tabs-mobile{display:none;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:.45rem .9rem .55rem;gap:6px;border-top:1px solid var(--bd);}
-.tabs-mobile::-webkit-scrollbar{display:none;}
-.tabs-mobile .tab{padding:6px 15px;background:var(--s2);border-radius:99px;border:1.5px solid var(--bd);flex-shrink:0;}
-.tabs-mobile .tab.active{background:#14532D;color:white;border-color:#14532D;}
-
-/* ── RESPONSIVE BREAKPOINT ── */
-@media(max-width:620px){
-  .tabs-desktop{display:none;}
-  .tabs-mobile{display:flex;}
-  .topbar-row1{height:46px;padding:0 .9rem;}
-  .brand-sub{display:none;}
-}
-
-/* ── PAGES ── */
-.page{display:none;padding:1.1rem 1.25rem;max-width:860px;margin:0 auto;}
-.page.active{display:block;}
-@media(max-width:620px){.page{padding:.8rem .75rem;}}
-
-/* ── MOTD ── */
-.motd{background:linear-gradient(135deg,#F0FDF4,#ECFDF5);border:1px solid #BBF7D0;border-radius:var(--r);padding:.85rem 1rem;margin-bottom:.9rem;display:flex;align-items:flex-start;gap:10px;}
-.motd-e{font-size:20px;flex-shrink:0;}.motd-t{font-size:12.5px;font-weight:600;color:#14532D;margin-bottom:2px;}.motd-b{font-size:11.5px;color:#166534;line-height:1.55;opacity:.9;}
-
-/* ── API BOX ── */
-.api-box{background:var(--s);border:1px solid var(--bd);border-radius:var(--r);padding:.75rem .9rem;margin-bottom:.9rem;box-shadow:var(--sh);}
-.api-row{display:flex;gap:7px;align-items:center;flex-wrap:wrap;}
-.api-lbl{font-size:12px;font-weight:500;color:var(--t2);white-space:nowrap;}
-.api-in{flex:1;min-width:120px;border:1px solid var(--bd);border-radius:var(--rx);padding:7px 9px;font-size:16px;font-family:monospace;background:var(--s2);color:var(--tx);}
-.api-in:focus{outline:none;border-color:#86EFAC;background:white;}
-.api-note{font-size:11px;color:var(--t3);margin-top:5px;}.api-note a{color:var(--gn);text-decoration:none;}
-.saved-pill{display:none;font-size:11px;font-weight:500;color:var(--gt);background:var(--gbg);padding:2px 8px;border-radius:99px;}
-.forget-btn{display:none;font-size:11px;color:#DC2626;background:none;border:none;cursor:pointer;text-decoration:underline;font-family:"DM Sans",sans-serif;}
-
-/* ── FILTERS ── */
-.filters{display:flex;gap:5px;align-items:center;margin-bottom:.9rem;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:2px;}
-.filters::-webkit-scrollbar{display:none;}
-.fb{padding:5px 13px;font-size:12px;font-weight:500;border:1.5px solid var(--bd);border-radius:99px;cursor:pointer;color:var(--t2);background:var(--s);white-space:nowrap;flex-shrink:0;font-family:"DM Sans",sans-serif;}
-.fb.active{background:#14532D;color:white;border-color:#14532D;}
-.rbtn{flex-shrink:0;padding:7px 16px;font-size:12px;font-weight:600;background:var(--tx);color:white;border:none;border-radius:99px;cursor:pointer;font-family:"DM Sans",sans-serif;display:flex;align-items:center;gap:5px;box-shadow:0 2px 6px rgba(0,0,0,.18);margin-left:auto;}
-.rbtn:disabled{opacity:.5;cursor:not-allowed;box-shadow:none;}
-@media(max-width:620px){
-  /* On mobile, Refresh button sits on its own line */
-  .filters{flex-wrap:wrap;}
-  .rbtn{margin-left:0;width:100%;justify-content:center;border-radius:var(--rs);padding:10px;margin-top:2px;}
-}
-
-/* ── STATUS BAR ── */
-.sbar{background:var(--s);border:1px solid var(--bd);border-radius:var(--rs);padding:.6rem .9rem;margin-bottom:.9rem;display:none;align-items:center;gap:9px;box-shadow:var(--sh);font-size:12px;color:var(--t2);}
-.sbar.err{background:#FEF2F2;border-color:#FECACA;color:#991B1B;}
-.sdot{width:8px;height:8px;border-radius:50%;background:var(--t3);flex-shrink:0;}
-.sdot.spin{background:var(--gn);animation:pulse 1s ease-in-out infinite;}.sdot.ok{background:var(--gn);}.sdot.err{background:#DC2626;}
+:root{--bg:#F5F3EE;--s:#FFF;--s2:#F0EEE9;--bd:#E5E2DB;--tx:#1C1917;--t2:#78716C;--t3:#A8A29E;--gn:#166534;--gbg:#DCFCE7;--gt:#14532D;--am:#92400E;--abg:#FEF3C7;--bl:#1E40AF;--bbg:#DBEAFE;--pu:#5B21B6;--pbg:#EDE9FE;--sh:0 1px 2px rgba(0,0,0,.06),0 1px 3px rgba(0,0,0,.04);--r:12px;--rs:8px;--rx:6px}
+*{box-sizing:border-box;margin:0;padding:0}html{-webkit-font-smoothing:antialiased}
+body{font-family:"DM Sans",sans-serif;background:var(--bg);color:var(--tx);min-height:100vh;font-size:14px;line-height:1.5}
+.topbar{background:var(--s);border-bottom:1px solid var(--bd);box-shadow:var(--sh);position:sticky;top:0;z-index:100}
+.topbar-row1{display:flex;align-items:center;justify-content:space-between;padding:0 1.25rem;height:52px;gap:12px}
+.brand{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.brand-icon{width:28px;height:28px;background:linear-gradient(135deg,#14532D,#166534);border-radius:7px;display:flex;align-items:center;justify-content:center;color:white;font-size:13px;flex-shrink:0}
+.brand-name{font-size:14px;font-weight:600;letter-spacing:-.02em;white-space:nowrap}
+.brand-sub{font-size:10px;color:var(--t3);white-space:nowrap}
+.tabs-desktop{display:flex;gap:2px;background:var(--s2);border-radius:9px;padding:3px;border:1px solid var(--bd)}
+.tab{padding:6px 14px;font-size:12px;font-weight:500;border:none;background:transparent;border-radius:6px;cursor:pointer;color:var(--t2);white-space:nowrap;font-family:"DM Sans",sans-serif;transition:background .12s,color .12s}
+.tab:hover{color:var(--tx);background:rgba(0,0,0,.04)}
+.tab.active{background:var(--s);color:var(--tx);box-shadow:var(--sh);font-weight:600}
+.tabs-mobile{display:none;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:.45rem .9rem .55rem;gap:6px;border-top:1px solid var(--bd)}
+.tabs-mobile::-webkit-scrollbar{display:none}
+.tabs-mobile .tab{padding:6px 15px;background:var(--s2);border-radius:99px;border:1.5px solid var(--bd);flex-shrink:0}
+.tabs-mobile .tab.active{background:#14532D;color:white;border-color:#14532D}
+@media(max-width:620px){.tabs-desktop{display:none}.tabs-mobile{display:flex}.topbar-row1{height:46px;padding:0 .9rem}.brand-sub{display:none}}
+.page{display:none;padding:1.1rem 1.25rem;max-width:860px;margin:0 auto}
+.page.active{display:block}
+@media(max-width:620px){.page{padding:.8rem .75rem}}
+.motd{background:linear-gradient(135deg,#F0FDF4,#ECFDF5);border:1px solid #BBF7D0;border-radius:var(--r);padding:.85rem 1rem;margin-bottom:.9rem;display:flex;align-items:flex-start;gap:10px}
+.motd-e{font-size:20px;flex-shrink:0}.motd-t{font-size:12.5px;font-weight:600;color:#14532D;margin-bottom:2px}.motd-b{font-size:11.5px;color:#166534;line-height:1.55;opacity:.9}
+.api-box{background:var(--s);border:1px solid var(--bd);border-radius:var(--r);padding:.75rem .9rem;margin-bottom:.9rem;box-shadow:var(--sh)}
+.api-row{display:flex;gap:7px;align-items:center;flex-wrap:wrap}
+.api-lbl{font-size:12px;font-weight:500;color:var(--t2);white-space:nowrap}
+.api-in{flex:1;min-width:120px;border:1px solid var(--bd);border-radius:var(--rx);padding:7px 9px;font-size:16px;font-family:monospace;background:var(--s2);color:var(--tx)}
+.api-in:focus{outline:none;border-color:#86EFAC;background:white}
+.api-note{font-size:11px;color:var(--t3);margin-top:5px}.api-note a{color:var(--gn);text-decoration:none}
+.saved-pill{display:none;font-size:11px;font-weight:500;color:var(--gt);background:var(--gbg);padding:2px 8px;border-radius:99px}
+.forget-btn{display:none;font-size:11px;color:#DC2626;background:none;border:none;cursor:pointer;text-decoration:underline;font-family:"DM Sans",sans-serif}
+.filters{display:flex;gap:5px;align-items:center;margin-bottom:.9rem;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:2px;flex-wrap:wrap}
+.filters::-webkit-scrollbar{display:none}
+.fb{padding:5px 13px;font-size:12px;font-weight:500;border:1.5px solid var(--bd);border-radius:99px;cursor:pointer;color:var(--t2);background:var(--s);white-space:nowrap;flex-shrink:0;font-family:"DM Sans",sans-serif}
+.fb.active{background:#14532D;color:white;border-color:#14532D}
+.rbtn{flex-shrink:0;padding:7px 16px;font-size:12px;font-weight:600;background:var(--tx);color:white;border:none;border-radius:99px;cursor:pointer;font-family:"DM Sans",sans-serif;display:flex;align-items:center;gap:5px;box-shadow:0 2px 6px rgba(0,0,0,.18)}
+.rbtn:disabled{opacity:.5;cursor:not-allowed;box-shadow:none}
+@media(max-width:620px){.rbtn{width:100%;justify-content:center;border-radius:var(--rs);padding:11px;margin-top:4px}}
+.sbar{background:var(--s);border:1px solid var(--bd);border-radius:var(--rs);padding:.6rem .9rem;margin-bottom:.9rem;display:none;align-items:center;gap:9px;box-shadow:var(--sh);font-size:12px;color:var(--t2)}
+.sbar.err{background:#FEF2F2;border-color:#FECACA;color:#991B1B}
+.sdot{width:8px;height:8px;border-radius:50%;background:var(--t3);flex-shrink:0}
+.sdot.spin{background:var(--gn);animation:pulse 1s ease-in-out infinite}.sdot.ok{background:var(--gn)}.sdot.err{background:#DC2626}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-
-/* ── JOB CARDS ── */
-.jcard{background:var(--s);border:1px solid var(--bd);border-radius:var(--r);padding:.9rem 1rem;margin-bottom:.6rem;box-shadow:var(--sh);}
-@media(min-width:621px){.jcard:hover{box-shadow:0 4px 12px rgba(0,0,0,.1);border-color:#D6D3CC;transform:translateY(-1px);transition:all .15s;}}
-.jch{display:flex;align-items:flex-start;gap:10px;}
-.cav{width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,var(--s2),var(--bd));border:1px solid var(--bd);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--t2);flex-shrink:0;}
-.jmeta{flex:1;min-width:0;}.jtitle{font-size:13.5px;font-weight:600;color:var(--tx);margin-bottom:1px;line-height:1.3;}.jco{font-size:12px;color:var(--t2);}
-/* Desktop: action pills next to title. Mobile: hidden, shown below */
-.jacts{display:flex;gap:5px;flex-shrink:0;}
-.jacts-mob{display:none;}
-@media(max-width:620px){.jacts{display:none;}.jacts-mob{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px;}}
-.ap{padding:5px 12px;font-size:11px;font-weight:500;border-radius:99px;cursor:pointer;border:1.5px solid var(--bd);background:white;color:var(--t2);font-family:"DM Sans",sans-serif;white-space:nowrap;}
-.ap.track{background:var(--tx);color:white;border-color:var(--tx);}.ap.tracked{background:var(--gbg);color:var(--gt);border-color:#86EFAC;}
-@media(max-width:620px){.ap{padding:7px 15px;font-size:12px;}}
-.badges{display:flex;gap:4px;flex-wrap:wrap;margin-top:8px;}
-.badge{font-size:10.5px;font-weight:500;padding:2px 8px;border-radius:99px;}
-.bc{background:var(--pbg);color:var(--pu);}.blo{background:var(--bbg);color:var(--bl);}.br{background:var(--gbg);color:var(--gt);}.bso{background:var(--s2);color:var(--t2);border:1px solid var(--bd);}.bda{background:var(--abg);color:var(--am);}
-.jsumm{font-size:12px;color:var(--t2);margin-top:8px;line-height:1.6;}
-.jlink{display:inline-flex;align-items:center;gap:3px;margin-top:8px;font-size:11.5px;font-weight:500;color:var(--gn);text-decoration:none;}
-
-/* ── SPINNER / EMPTY ── */
+.jcard{background:var(--s);border:1px solid var(--bd);border-radius:var(--r);padding:.9rem 1rem;margin-bottom:.6rem;box-shadow:var(--sh)}
+@media(min-width:621px){.jcard:hover{box-shadow:0 4px 12px rgba(0,0,0,.1);border-color:#D6D3CC;transform:translateY(-1px);transition:all .15s}}
+.jch{display:flex;align-items:flex-start;gap:10px}
+.cav{width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,var(--s2),var(--bd));border:1px solid var(--bd);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--t2);flex-shrink:0}
+.jmeta{flex:1;min-width:0}.jtitle{font-size:13.5px;font-weight:600;color:var(--tx);margin-bottom:1px;line-height:1.3}.jco{font-size:12px;color:var(--t2)}
+.jacts{display:flex;gap:5px;flex-shrink:0}.jacts-mob{display:none}
+@media(max-width:620px){.jacts{display:none}.jacts-mob{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}}
+.ap{padding:5px 12px;font-size:11px;font-weight:500;border-radius:99px;cursor:pointer;border:1.5px solid var(--bd);background:white;color:var(--t2);font-family:"DM Sans",sans-serif;white-space:nowrap}
+.ap.track{background:var(--tx);color:white;border-color:var(--tx)}.ap.tracked{background:var(--gbg);color:var(--gt);border-color:#86EFAC}
+@media(max-width:620px){.ap{padding:7px 15px;font-size:12px}}
+.badges{display:flex;gap:4px;flex-wrap:wrap;margin-top:8px}
+.badge{font-size:10.5px;font-weight:500;padding:2px 8px;border-radius:99px}
+.bc{background:var(--pbg);color:var(--pu)}.blo{background:var(--bbg);color:var(--bl)}.br{background:var(--gbg);color:var(--gt)}.bso{background:var(--s2);color:var(--t2);border:1px solid var(--bd)}.bda{background:var(--abg);color:var(--am)}
+.jsumm{font-size:12px;color:var(--t2);margin-top:8px;line-height:1.6}
+.jlink{display:inline-flex;align-items:center;gap:3px;margin-top:8px;font-size:11.5px;font-weight:500;color:var(--gn);text-decoration:none}
 @keyframes spin{to{transform:rotate(360deg)}}
-.spinner{width:18px;height:18px;border:2px solid var(--bd);border-top-color:var(--gn);border-radius:50%;animation:spin .7s linear infinite;display:inline-block;vertical-align:middle;margin-right:5px;}
-.empty-st{text-align:center;padding:2.5rem 1rem;color:var(--t3);}
-.empty-ic{font-size:36px;margin-bottom:10px;opacity:.35;}
-.empty-tx{font-size:13px;line-height:1.7;}
-.slbl{font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--t3);margin-bottom:5px;}
-
-/* ── CHAT ── */
-/* Chat page uses a flex column that fills the viewport height minus topbar */
-#tab-chat.page{padding-bottom:0;}
-.chat-wrap{display:flex;flex-direction:column;height:calc(100vh - 120px);min-height:400px;}
-@media(max-width:620px){.chat-wrap{height:calc(100svh - 106px);}}
-.chat-hint{background:var(--s);border:1px solid var(--bd);border-radius:var(--rs);padding:.55rem .9rem;margin-bottom:.75rem;font-size:12px;color:var(--t2);box-shadow:var(--sh);flex-shrink:0;}
-.cmsgs{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;display:flex;flex-direction:column;gap:10px;padding:.9rem;background:var(--s);border:1px solid var(--bd);border-radius:var(--r);margin-bottom:.75rem;box-shadow:var(--sh);}
-.brow{display:flex;align-items:flex-end;gap:7px;}.brow.u{flex-direction:row-reverse;}
-.bav{width:26px;height:26px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;}
-.bav.ai{background:linear-gradient(135deg,#14532D,#166534);color:white;}.bav.u{background:var(--tx);color:white;}
-.bub{max-width:85%;padding:9px 13px;border-radius:15px;font-size:13px;line-height:1.6;white-space:pre-wrap;word-break:break-word;}
-@media(max-width:620px){.bub{max-width:90%;}}
-.bub.u{background:var(--tx);color:white;border-radius:15px 15px 3px 15px;}
-.bub.ai{background:var(--s);border:1px solid var(--bd);color:var(--tx);border-radius:15px 15px 15px 3px;box-shadow:var(--sh);}
-.cin-row{display:flex;gap:7px;align-items:flex-end;flex-shrink:0;padding-bottom:.8rem;}
-.cta{flex:1;border:1.5px solid var(--bd);border-radius:var(--r);padding:9px 13px;font-size:16px;font-family:"DM Sans",sans-serif;resize:none;height:56px;background:var(--s);}
-.cta:focus{outline:none;border-color:#86EFAC;}
-.csend{padding:0 16px;height:56px;background:var(--tx);color:white;border:none;border-radius:var(--r);font-size:13px;font-weight:600;cursor:pointer;font-family:"DM Sans",sans-serif;flex-shrink:0;}
-.csend:disabled{opacity:.4;cursor:not-allowed;}
-
-/* ── RESUME ── */
-.rgrid{display:grid;gap:.9rem;}
-.cp{background:var(--s);border:1px solid var(--bd);border-radius:var(--r);padding:1rem;box-shadow:var(--sh);}
-.rta{width:100%;border:1.5px solid var(--bd);border-radius:var(--rs);padding:9px 11px;font-size:16px;font-family:monospace;resize:vertical;min-height:150px;background:var(--s2);color:var(--tx);line-height:1.6;}
-.rta:focus{outline:none;border-color:#86EFAC;background:white;}
-.jpick{width:100%;border:1.5px solid var(--bd);border-radius:var(--rs);padding:9px 11px;font-size:16px;font-family:"DM Sans",sans-serif;background:var(--s);color:var(--tx);}
-.abtns{display:flex;gap:7px;flex-wrap:wrap;margin-top:.9rem;}
-@media(max-width:620px){.abtns{flex-direction:column;}}
-.btnp{padding:11px 18px;font-size:13px;font-weight:600;background:var(--tx);color:white;border:none;border-radius:var(--rs);cursor:pointer;font-family:"DM Sans",sans-serif;text-align:center;}
-.btnp:disabled{opacity:.5;}.btns{padding:11px 18px;font-size:13px;font-weight:500;background:var(--s);color:var(--tx);border:1.5px solid var(--bd);border-radius:var(--rs);cursor:pointer;font-family:"DM Sans",sans-serif;text-align:center;}
-.rhdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px;}
-.rlbl{font-size:12px;font-weight:600;color:var(--t2);}
-.cpybtn{padding:5px 12px;font-size:11px;font-weight:500;background:var(--s2);border:1px solid var(--bd);border-radius:var(--rx);cursor:pointer;font-family:"DM Sans",sans-serif;}
-.rout{background:var(--s2);border:1px solid var(--bd);border-radius:var(--rs);padding:.9rem;font-size:12px;line-height:1.75;white-space:pre-wrap;color:var(--tx);min-height:80px;max-height:55vh;overflow-y:auto;-webkit-overflow-scrolling:touch;}
-
-/* ── TRACKER ── */
-.stats-strip{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:.9rem;}
-@media(max-width:460px){.stats-strip{grid-template-columns:repeat(3,1fr);}}
-.stat-block{background:var(--s);border:1px solid var(--bd);border-radius:var(--rs);padding:.6rem .3rem;text-align:center;box-shadow:var(--sh);}
-.stat-n{font-size:20px;font-weight:700;letter-spacing:-.03em;}.stat-l{font-size:10px;color:var(--t3);margin-top:2px;font-weight:500;}
-.trk-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:.75rem;}
-.trk-title{font-size:14px;font-weight:700;letter-spacing:-.02em;}
-.exp-btn{padding:6px 14px;font-size:12px;font-weight:500;background:var(--s);border:1.5px solid var(--bd);border-radius:var(--rx);cursor:pointer;font-family:"DM Sans",sans-serif;}
-.ttbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:var(--r);border:1px solid var(--bd);box-shadow:var(--sh);}
-.ttbl{width:100%;border-collapse:collapse;background:var(--s);min-width:480px;}
-.ttbl th{background:var(--s2);padding:9px 10px;text-align:left;font-size:10.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--t3);border-bottom:1px solid var(--bd);}
-.ttbl td{padding:9px 10px;border-bottom:1px solid #F5F3EE;font-size:12px;vertical-align:middle;}
-.ttbl tr:last-child td{border-bottom:none;}.ttbl tr:hover td{background:#FAFAF8;}
-.rname{font-weight:600;font-size:12.5px;}.rco{font-size:11px;color:var(--t2);margin-top:1px;}
-.ssel{border:1px solid var(--bd);border-radius:var(--rx);padding:3px 7px;font-size:11.5px;background:white;font-family:"DM Sans",sans-serif;}
-.notef{border:1px solid var(--bd);border-radius:var(--rx);padding:3px 7px;font-size:11.5px;width:100%;min-width:80px;font-family:"DM Sans",sans-serif;}
-.delbtn{background:none;border:none;color:var(--t3);cursor:pointer;font-size:15px;padding:0 3px;}.delbtn:hover{color:#DC2626;}
-.t-empty{background:var(--s);border:1px solid var(--bd);border-radius:var(--r);padding:2.5rem;text-align:center;color:var(--t3);font-size:13px;box-shadow:var(--sh);}
-.cbadge{display:inline-flex;align-items:center;justify-content:center;background:#DC2626;color:white;font-size:10px;font-weight:700;border-radius:99px;min-width:17px;height:17px;padding:0 4px;margin-left:4px;}
+.spinner{width:18px;height:18px;border:2px solid var(--bd);border-top-color:var(--gn);border-radius:50%;animation:spin .7s linear infinite;display:inline-block;vertical-align:middle;margin-right:5px}
+.empty-st{text-align:center;padding:2.5rem 1rem;color:var(--t3)}.empty-ic{font-size:36px;margin-bottom:10px;opacity:.35}.empty-tx{font-size:13px;line-height:1.7}
+.slbl{font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--t3);margin-bottom:5px}
+.chat-hint{background:var(--s);border:1px solid var(--bd);border-radius:var(--rs);padding:.55rem .9rem;margin-bottom:.75rem;font-size:12px;color:var(--t2);box-shadow:var(--sh)}
+.cwrap{display:flex;flex-direction:column;height:calc(100vh - 120px);min-height:400px}
+@media(max-width:620px){.cwrap{height:calc(100svh - 106px)}}
+.cmsgs{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;display:flex;flex-direction:column;gap:10px;padding:.9rem;background:var(--s);border:1px solid var(--bd);border-radius:var(--r);margin-bottom:.75rem;box-shadow:var(--sh)}
+.brow{display:flex;align-items:flex-end;gap:7px}.brow.u{flex-direction:row-reverse}
+.bav{width:26px;height:26px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700}
+.bav.ai{background:linear-gradient(135deg,#14532D,#166534);color:white}.bav.u{background:var(--tx);color:white}
+.bub{max-width:85%;padding:9px 13px;border-radius:15px;font-size:13px;line-height:1.6;white-space:pre-wrap;word-break:break-word}
+@media(max-width:620px){.bub{max-width:90%}}
+.bub.u{background:var(--tx);color:white;border-radius:15px 15px 3px 15px}
+.bub.ai{background:var(--s);border:1px solid var(--bd);color:var(--tx);border-radius:15px 15px 15px 3px;box-shadow:var(--sh)}
+.cin-row{display:flex;gap:7px;align-items:flex-end;flex-shrink:0;padding-bottom:.8rem}
+.cta{flex:1;border:1.5px solid var(--bd);border-radius:var(--r);padding:9px 13px;font-size:16px;font-family:"DM Sans",sans-serif;resize:none;height:56px;background:var(--s)}
+.cta:focus{outline:none;border-color:#86EFAC}
+.csend{padding:0 16px;height:56px;background:var(--tx);color:white;border:none;border-radius:var(--r);font-size:13px;font-weight:600;cursor:pointer;font-family:"DM Sans",sans-serif;flex-shrink:0}
+.csend:disabled{opacity:.4;cursor:not-allowed}
+#tab-chat.page{padding-bottom:0}
+.rgrid{display:grid;gap:.9rem}.cp{background:var(--s);border:1px solid var(--bd);border-radius:var(--r);padding:1rem;box-shadow:var(--sh)}
+.rta{width:100%;border:1.5px solid var(--bd);border-radius:var(--rs);padding:9px 11px;font-size:16px;font-family:monospace;resize:vertical;min-height:150px;background:var(--s2);color:var(--tx);line-height:1.6}
+.rta:focus{outline:none;border-color:#86EFAC;background:white}
+.jpick{width:100%;border:1.5px solid var(--bd);border-radius:var(--rs);padding:9px 11px;font-size:16px;font-family:"DM Sans",sans-serif;background:var(--s);color:var(--tx)}
+.abtns{display:flex;gap:7px;flex-wrap:wrap;margin-top:.9rem}
+@media(max-width:620px){.abtns{flex-direction:column}}
+.btnp{padding:11px 18px;font-size:13px;font-weight:600;background:var(--tx);color:white;border:none;border-radius:var(--rs);cursor:pointer;font-family:"DM Sans",sans-serif;text-align:center}
+.btnp:disabled{opacity:.5}.btns{padding:11px 18px;font-size:13px;font-weight:500;background:var(--s);color:var(--tx);border:1.5px solid var(--bd);border-radius:var(--rs);cursor:pointer;font-family:"DM Sans",sans-serif;text-align:center}
+.btns:hover{background:var(--s2)}
+.rhdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px}.rlbl{font-size:12px;font-weight:600;color:var(--t2)}
+.cpybtn{padding:5px 12px;font-size:11px;font-weight:500;background:var(--s2);border:1px solid var(--bd);border-radius:var(--rx);cursor:pointer;font-family:"DM Sans",sans-serif}
+.rout{background:var(--s2);border:1px solid var(--bd);border-radius:var(--rs);padding:.9rem;font-size:12px;line-height:1.75;white-space:pre-wrap;color:var(--tx);min-height:80px;max-height:55vh;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.stats-strip{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:.9rem}
+@media(max-width:460px){.stats-strip{grid-template-columns:repeat(3,1fr)}}
+.stat-block{background:var(--s);border:1px solid var(--bd);border-radius:var(--rs);padding:.6rem .3rem;text-align:center;box-shadow:var(--sh)}
+.stat-n{font-size:20px;font-weight:700;letter-spacing:-.03em}.stat-l{font-size:10px;color:var(--t3);margin-top:2px;font-weight:500}
+.trk-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:.75rem}
+.trk-title{font-size:14px;font-weight:700;letter-spacing:-.02em}
+.exp-btn{padding:6px 14px;font-size:12px;font-weight:500;background:var(--s);border:1.5px solid var(--bd);border-radius:var(--rx);cursor:pointer;font-family:"DM Sans",sans-serif}
+.ttbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:var(--r);border:1px solid var(--bd);box-shadow:var(--sh)}
+.ttbl{width:100%;border-collapse:collapse;background:var(--s);min-width:480px}
+.ttbl th{background:var(--s2);padding:9px 10px;text-align:left;font-size:10.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--t3);border-bottom:1px solid var(--bd)}
+.ttbl td{padding:9px 10px;border-bottom:1px solid #F5F3EE;font-size:12px;vertical-align:middle}
+.ttbl tr:last-child td{border-bottom:none}.ttbl tr:hover td{background:#FAFAF8}
+.rname{font-weight:600;font-size:12.5px}.rco{font-size:11px;color:var(--t2);margin-top:1px}
+.ssel{border:1px solid var(--bd);border-radius:var(--rx);padding:3px 7px;font-size:11.5px;background:white;font-family:"DM Sans",sans-serif}
+.notef{border:1px solid var(--bd);border-radius:var(--rx);padding:3px 7px;font-size:11.5px;width:100%;min-width:80px;font-family:"DM Sans",sans-serif}
+.delbtn{background:none;border:none;color:var(--t3);cursor:pointer;font-size:15px;padding:0 3px}.delbtn:hover{color:#DC2626}
+.t-empty{background:var(--s);border:1px solid var(--bd);border-radius:var(--r);padding:2.5rem;text-align:center;color:var(--t3);font-size:13px;box-shadow:var(--sh)}
+.cbadge{display:inline-flex;align-items:center;justify-content:center;background:#DC2626;color:white;font-size:10px;font-weight:700;border-radius:99px;min-width:17px;height:17px;padding:0 4px;margin-left:4px}
 </style>
 </head>
 <body>
-
 <div class="topbar">
   <div class="topbar-row1">
     <div class="brand">
@@ -192,8 +141,6 @@ body{font-family:"DM Sans",sans-serif;background:var(--bg);color:var(--tx);min-h
     <button class="tab" onclick="showTab('tracker',this)">&#9989; Tracker<span class="cbadge" id="tcntM" style="display:none"></span></button>
   </div>
 </div>
-
-<!-- JOBS -->
 <div id="tab-jobs" class="page active">
   <div class="motd"><div class="motd-e" id="mi"></div><div><div class="motd-t" id="mt"></div><div class="motd-b" id="mb"></div></div></div>
   <div class="api-box">
@@ -218,13 +165,11 @@ body{font-family:"DM Sans",sans-serif;background:var(--bg);color:var(--tx);min-h
   <div class="sbar" id="sbar"><div class="sdot" id="sdot"></div><span id="smsg"></span></div>
   <div id="jobs"><div class="empty-st"><div class="empty-ic">&#128269;</div><div class="empty-tx">Enter your API key above and tap <strong>Refresh listings</strong><br>to find your matches.</div></div></div>
 </div>
-
-<!-- CHAT -->
 <div id="tab-chat" class="page">
-  <div class="chat-wrap">
+  <div class="cwrap">
     <div class="chat-hint">&#128172; <strong>Ask me anything</strong> &mdash; company research, salary, interview prep, how to position your PT background.</div>
     <div class="cmsgs" id="cmsgs">
-      <div class="brow"><div class="bav ai">C</div><div class="bub ai">Hi Ashley! I'm your personal career coach. I know your background as a DPT/OCS Clinic Director and have context on your current listings. What would you like to explore?</div></div>
+      <div class="brow"><div class="bav ai">C</div><div class="bub ai">Hi Ashley! I&#8217;m your personal career coach. I know your background as a DPT/OCS Clinic Director and have context on your current listings. What would you like to explore?</div></div>
     </div>
     <div class="cin-row">
       <textarea class="cta" id="cin" placeholder="Ask about a company, salary, interview prep..." onkeydown="chatKey(event)"></textarea>
@@ -232,8 +177,6 @@ body{font-family:"DM Sans",sans-serif;background:var(--bg);color:var(--tx);min-h
     </div>
   </div>
 </div>
-
-<!-- RESUME -->
 <div id="tab-resume" class="page">
   <div class="rgrid">
     <div class="cp"><div class="slbl">Your base resume</div><textarea class="rta" id="rtxt" placeholder="Paste your full resume here. Saved automatically." oninput="saveResume()" style="min-height:160px;"></textarea></div>
@@ -250,119 +193,353 @@ body{font-family:"DM Sans",sans-serif;background:var(--bg);color:var(--tx);min-h
     <div id="rrwrap" class="cp" style="display:none;"><div class="rhdr"><span class="rlbl" id="rlbl">Result</span><button class="cpybtn" onclick="copyResult()">Copy</button></div><div class="rout" id="rout"></div></div>
   </div>
 </div>
-
-<!-- TRACKER -->
 <div id="tab-tracker" class="page">
   <div class="stats-strip" id="sstrip"></div>
   <div class="trk-top"><div class="trk-title">Application tracker</div><button class="exp-btn" onclick="exportCSV()">&#8595; Export CSV</button></div>
   <div id="tbody"></div>
 </div>
-
 <script>
-var allJobs=[],activeFilter="all",chatHistory=[],applied={};
-var TITLES="Associate Product Manager (medical device), Product Manager (medical device), Medical Science Liaison, Sales Force Enablement / Training, Client Success Manager, Clinical Education Specialist, Staff Sales Operations Analyst, Customer Success / Account Manager";
-var COMPANIES="BD, Arthrex, Stryker, Medtronic, Biotronik, Abbott, Zimmer Biomet, Boston Scientific, Insulet, Edwards Lifesciences, DePuy Synthes, Dexcom, Intuitive Surgical, Smith & Nephew, Globus Medical, Synergy Spine Solutions, Gore, Personify Health, Prompt AI, Ambience Healthcare, Limber Health";
-var LS_KEY="ashley_api_key",LS_R="ashley_resume",LS_T="ashley_tracker";
-var BIO="Ashley Stadler PT DPT OCS. 15 years as a Physical Therapist. Clinic Director at Banner PT Mesa AZ since Nov 2023: grew clinic from 2 to 9 clinicians, cut contract labor 85%, managed P&L above budget. Previously Staff PT and Patient Engagement Specialist at Banner PT 2019-2023, Staff PT and CCCE at Select PT 2010-2016. DPT Northern Arizona University, BS Exercise Science magna cum laude University of New Mexico. Licensed PT 2010, OCS 2013-2023, Graston, Credentialed Clinical Instructor. Pivoting to medical device and health-tech industry.";
-var MSGS=[
-  {e:"&#127775;",t:"Your clinical expertise is your superpower.",b:"15 years of patient outcomes, team leadership, and real-world ortho knowledge -- exactly what med-device companies need."},
-  {e:"&#128170;",t:"Every application is a rep.",b:"The more you put out there, the stronger your job-search muscle gets. Keep showing up -- it compounds."},
-  {e:"&#127919;",t:"You are not starting over. You are leveling up.",b:"A career pivot with your background is not a step back -- it brings a decade of hard-won insight to a brand new arena."},
-  {e:"&#128161;",t:"Informational interviews open doors.",b:"Reach out to one MSL or clinical educator on LinkedIn today. A 20-minute call can move faster than 20 applications."},
-  {e:"&#10024;",t:"Your DPT plus OCS combination is rare in industry.",b:"Most candidates do not have your clinical credibility. Lead with it in every cover letter and conversation."},
-  {e:"&#128200;",t:"Consistency beats intensity.",b:"Checking this board every morning and applying to 2-3 strong fits per week outperforms a frantic weekend blitz every time."},
-  {e:"&#129309;",t:"Your network is bigger than you think.",b:"Former colleagues, PT students you mentored, physicians you worked with -- let them know you are looking. Referrals land interviews."},
-  {e:"&#127942;",t:"Clinic director is a serious credential.",b:"P and L ownership, hiring, budget management, metrics -- you have done it all. That is business leadership, not just a PT background."},
-  {e:"&#127757;",t:"The med-device world needs people like you.",b:"Companies spend millions training reps who have never treated a patient. You already speak the language clinicians trust."},
-  {e:"&#128293;",t:"Rejection is redirection.",b:"Every no right now narrows the field toward the role that is actually the right fit. Keep going."},
-  {e:"&#128221;",t:"Tailor one application today.",b:"A cover letter that speaks directly to the job description outperforms a generic one every time."},
-  {e:"&#129504;",t:"You understand the buyer better than anyone.",b:"PT and ortho surgeons are major med-device customers. Your clinical fluency is worth real revenue to them."},
-  {e:"&#9889;",t:"Small steps, big momentum.",b:"Apply to one job, send one message, take one step. That is how careers change."},
-  {e:"&#127959;",t:"You have already built something from nothing.",b:"You grew a struggling clinic to 9 clinicians with 85% less contract labor. That story sells itself in any interview."}
+var allJobs = [], activeFilter = "all", chatHistory = [], applied = {};
+var TITLES = "Associate Product Manager (medical device), Product Manager (medical device), Medical Science Liaison, Sales Force Enablement / Training, Client Success Manager, Clinical Education Specialist, Staff Sales Operations Analyst, Customer Success / Account Manager";
+var COMPANIES = "BD, Arthrex, Stryker, Medtronic, Biotronik, Abbott, Zimmer Biomet, Boston Scientific, Insulet, Edwards Lifesciences, DePuy Synthes, Dexcom, Intuitive Surgical, Smith & Nephew, Globus Medical, Synergy Spine Solutions, Gore, Personify Health, Prompt AI, Ambience Healthcare, Limber Health";
+var LS_KEY = "ashley_api_key", LS_R = "ashley_resume", LS_T = "ashley_tracker";
+var BIO = "Ashley Stadler PT DPT OCS. 15 years as a Physical Therapist. Clinic Director at Banner PT Mesa AZ since Nov 2023: grew clinic from 2 to 9 clinicians, cut contract labor 85%, managed P&L above budget. Previously Staff PT and Patient Engagement Specialist at Banner PT 2019-2023, Staff PT and CCCE at Select PT 2010-2016. DPT Northern Arizona University, BS Exercise Science magna cum laude University of New Mexico. Licensed PT 2010, OCS 2013-2023, Graston, Credentialed Clinical Instructor. Pivoting to medical device and health-tech industry.";
+var MSGS = [
+  {e:"&#127775;", t:"Your clinical expertise is your superpower.", b:"15 years of patient outcomes, team leadership, and real-world ortho knowledge -- exactly what med-device companies need."},
+  {e:"&#128170;", t:"Every application is a rep.", b:"The more you put out there, the stronger your job-search muscle gets. Keep showing up -- it compounds."},
+  {e:"&#127919;", t:"You are not starting over. You are leveling up.", b:"A career pivot with your background is not a step back -- it brings a decade of hard-won insight to a brand new arena."},
+  {e:"&#128161;", t:"Informational interviews open doors.", b:"Reach out to one MSL or clinical educator on LinkedIn today. A 20-minute call can move faster than 20 applications."},
+  {e:"&#10024;",  t:"Your DPT plus OCS combination is rare in industry.", b:"Most candidates do not have your clinical credibility. Lead with it in every cover letter and conversation."},
+  {e:"&#128200;", t:"Consistency beats intensity.", b:"Checking this board every morning and applying to 2-3 strong fits per week outperforms a frantic weekend blitz every time."},
+  {e:"&#129309;", t:"Your network is bigger than you think.", b:"Former colleagues, PT students you mentored, physicians you worked with -- let them know you are looking. Referrals land interviews."},
+  {e:"&#127942;", t:"Clinic director is a serious credential.", b:"P and L ownership, hiring, budget management, metrics -- you have done it all. That is business leadership, not just a PT background."},
+  {e:"&#127757;", t:"The med-device world needs people like you.", b:"Companies spend millions training reps who have never treated a patient. You already speak the language clinicians trust."},
+  {e:"&#128293;", t:"Rejection is redirection.", b:"Every no right now narrows the field toward the role that is actually the right fit. Keep going."},
+  {e:"&#128221;", t:"Tailor one application today.", b:"A cover letter that speaks directly to the job description outperforms a generic one every time."},
+  {e:"&#129504;", t:"You understand the buyer better than anyone.", b:"PT and ortho surgeons are major med-device customers. Your clinical fluency is worth real revenue to them."},
+  {e:"&#9889;",   t:"Small steps, big momentum.", b:"Apply to one job, send one message, take one step. That is how careers change."},
+  {e:"&#127959;", t:"You have already built something from nothing.", b:"You grew a struggling clinic to 9 clinicians with 85% less contract labor. That story sells itself in any interview."}
 ];
-var fetchTimer=null,fetchStart=0;
+var fetchTimer = null, fetchStart = 0;
 
-function showMotd(){var m=MSGS[new Date().getDay()%MSGS.length];document.getElementById("mi").innerHTML=m.e;document.getElementById("mt").textContent=m.t;document.getElementById("mb").textContent=m.b;}
-
-function showTab(tab,btn){
-  document.querySelectorAll(".page").forEach(function(p){p.classList.remove("active");});
-  document.querySelectorAll(".tab").forEach(function(b){b.classList.remove("active");});
-  document.getElementById("tab-"+tab).classList.add("active");
-  // activate all tabs with matching data
-  document.querySelectorAll(".tab").forEach(function(b){
-    if(b.getAttribute("onclick") && b.getAttribute("onclick").indexOf("'"+tab+"'")>-1){b.classList.add("active");}
-  });
-  if(tab==="tracker")renderTracker();
-  if(tab==="resume")populateJobPicker();
-  window.scrollTo(0,0);
+function showMotd() {
+  var m = MSGS[new Date().getDay() % MSGS.length];
+  document.getElementById("mi").innerHTML = m.e;
+  document.getElementById("mt").textContent = m.t;
+  document.getElementById("mb").textContent = m.b;
 }
 
-function getKey(){return document.getElementById("apikey").value.trim();}
-function setStatus(msg,type){var bar=document.getElementById("sbar"),dot=document.getElementById("sdot"),txt=document.getElementById("smsg");if(!msg){bar.style.display="none";return;}bar.style.display="flex";bar.className="sbar"+(type==="err"?" err":"");dot.className="sdot"+(type==="loading"?" spin":type==="ok"?" ok":type==="err"?" err":"");txt.textContent=msg;}
-function loadSavedKey(){var s=localStorage.getItem(LS_KEY);if(s){document.getElementById("apikey").value=s;document.getElementById("spill").style.display="";document.getElementById("fbtn").style.display="";document.getElementById("anote").textContent="Key saved on this device. Tap forget to remove it.";fetchJobs();}else{document.getElementById("jobs").innerHTML='<div class="empty-st"><div class="empty-ic">&#128269;</div><div class="empty-tx">Enter your API key above and tap <strong>Refresh listings</strong><br>to find your matches.</div></div>';}}
-function onKeyInput(){var k=document.getElementById("apikey").value.trim();if(k){localStorage.setItem(LS_KEY,k);document.getElementById("spill").style.display="";document.getElementById("fbtn").style.display="";document.getElementById("anote").textContent="Key saved on this device. Tap forget to remove it.";}}
-function clearKey(){localStorage.removeItem(LS_KEY);document.getElementById("apikey").value="";document.getElementById("spill").style.display="none";document.getElementById("fbtn").style.display="none";setStatus("","");document.getElementById("jobs").innerHTML='<div class="empty-st"><div class="empty-ic">&#128269;</div><div class="empty-tx">Enter your API key above and tap <strong>Refresh listings</strong>.</div></div>';}
-function escH(s){if(!s)return"";return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
-function initials(c){return c.replace(/[^a-zA-Z\s]/g,"").split(" ").filter(Boolean).slice(0,2).map(function(w){return w[0].toUpperCase();}).join("");}
-function catLbl(c){return({product:"Product/APM",msl:"MSL",sales:"Sales",cs:"Client success",clinical:"Clinical ed",ops:"Sales ops"})[c]||c;}
-function setFilter(f,btn){activeFilter=f;document.querySelectorAll(".fb").forEach(function(b){b.classList.remove("active");});btn.classList.add("active");renderJobs();}
-function loadTracker(){try{var s=localStorage.getItem(LS_T);applied=s?JSON.parse(s):{};} catch(e){applied={};}}
-function saveTracker(){localStorage.setItem(LS_T,JSON.stringify(applied));}
-function updateBadge(){var n=Object.keys(applied).length;["tcntD","tcntM"].forEach(function(id){var el=document.getElementById(id);if(!el)return;if(n>0){el.style.display="";el.textContent=n;}else el.style.display="none";});}
-function addToTracker(idx){var j=allJobs[idx];if(!j)return;var id=j.title+"|"+j.company;if(!applied[id])applied[id]={title:j.title,company:j.company,location:j.location||"",url:j.url||"",status:"Applied",notes:"",date:new Date().toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"}),category:j.category};saveTracker();updateBadge();renderJobs();}
+function showTab(tab, btn) {
+  document.querySelectorAll(".page").forEach(function(p) { p.classList.remove("active"); });
+  document.querySelectorAll(".tab").forEach(function(b) { b.classList.remove("active"); });
+  document.getElementById("tab-" + tab).classList.add("active");
+  btn.classList.add("active");
+  document.querySelectorAll(".tab").forEach(function(b) {
+    var oc = b.getAttribute("onclick") || "";
+    if (oc.indexOf("'" + tab + "'") > -1) { b.classList.add("active"); }
+  });
+  if (tab === "tracker") renderTracker();
+  if (tab === "resume") populateJobPicker();
+  window.scrollTo(0, 0);
+}
 
-function renderJobs(){
-  var c=document.getElementById("jobs");
-  var list=allJobs;
-  if(activeFilter==="remote")list=allJobs.filter(function(j){return j.isRemote;});
-  else if(activeFilter!=="all")list=allJobs.filter(function(j){return j.category===activeFilter;});
-  if(!list.length){c.innerHTML='<div class="empty-st"><div class="empty-ic">&#128270;</div><div class="empty-tx">No listings matched this filter.</div></div>';return;}
-  c.innerHTML=list.map(function(j){
-    var ri=allJobs.indexOf(j);
-    var tracked=!!applied[j.title+"|"+j.company];
-    var acts='<button class="ap" onclick="askJob('+ri+')">Ask Claude</button><button class="ap" onclick="tailorFor('+ri+')">Tailor</button>'+(tracked?'<button class="ap tracked" disabled>&#10003; Tracking</button>':'<button class="ap track" onclick="addToTracker('+ri+')">+ Track</button>');
-    return '<div class="jcard">'
-      +'<div class="jch"><div class="cav">'+escH(initials(j.company))+'</div>'
-      +'<div class="jmeta"><div class="jtitle">'+escH(j.title)+'</div><div class="jco">'+escH(j.company)+'</div></div>'
-      +'<div class="jacts">'+acts+'</div></div>'
-      +'<div class="badges"><span class="badge bc">'+catLbl(j.category)+'</span><span class="badge blo">'+escH(j.location)+'</span>'
-      +(j.isRemote?'<span class="badge br">Remote</span>':'')+(j.source?'<span class="badge bso">'+escH(j.source)+'</span>':'')+(j.posted?'<span class="badge bda">'+escH(j.posted)+'</span>':'')+(j.salary?'<span class="badge bso">'+escH(j.salary)+'</span>':'')
-      +'</div>'
-      +'<div class="jsumm">'+escH(j.summary)+'</div>'
-      +(j.url?'<a class="jlink" href="'+escH(j.url)+'" target="_blank">View listing &#8599;</a>':'')
-      +'<div class="jacts-mob">'+acts+'</div>'
-      +'</div>';
+function getKey() { return document.getElementById("apikey").value.trim(); }
+
+function setStatus(msg, type) {
+  var bar = document.getElementById("sbar");
+  var dot = document.getElementById("sdot");
+  var txt = document.getElementById("smsg");
+  if (!msg) { bar.style.display = "none"; return; }
+  bar.style.display = "flex";
+  bar.className = "sbar" + (type === "err" ? " err" : "");
+  dot.className = "sdot" + (type === "loading" ? " spin" : type === "ok" ? " ok" : type === "err" ? " err" : "");
+  txt.textContent = msg;
+}
+
+function loadSavedKey() {
+  var s = localStorage.getItem(LS_KEY);
+  if (s) {
+    document.getElementById("apikey").value = s;
+    document.getElementById("spill").style.display = "";
+    document.getElementById("fbtn").style.display = "";
+    document.getElementById("anote").textContent = "Key saved on this device. Tap forget to remove it.";
+    fetchJobs();
+  } else {
+    document.getElementById("jobs").innerHTML = '<div class="empty-st"><div class="empty-ic">&#128269;</div><div class="empty-tx">Enter your API key above and tap <strong>Refresh listings</strong><br>to find your matches.</div></div>';
+  }
+}
+
+function onKeyInput() {
+  var k = document.getElementById("apikey").value.trim();
+  if (k) {
+    localStorage.setItem(LS_KEY, k);
+    document.getElementById("spill").style.display = "";
+    document.getElementById("fbtn").style.display = "";
+    document.getElementById("anote").textContent = "Key saved on this device. Tap forget to remove it.";
+  }
+}
+
+function clearKey() {
+  localStorage.removeItem(LS_KEY);
+  document.getElementById("apikey").value = "";
+  document.getElementById("spill").style.display = "none";
+  document.getElementById("fbtn").style.display = "none";
+  setStatus("", "");
+  document.getElementById("jobs").innerHTML = '<div class="empty-st"><div class="empty-ic">&#128269;</div><div class="empty-tx">Enter your API key above and tap <strong>Refresh listings</strong>.</div></div>';
+}
+
+function escH(s) {
+  if (!s) return "";
+  return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
+
+function initials(c) {
+  return c.replace(/[^a-zA-Z\s]/g, "").split(" ").filter(Boolean).slice(0, 2).map(function(w) { return w[0].toUpperCase(); }).join("");
+}
+
+function catLbl(c) {
+  return ({product:"Product/APM", msl:"MSL", sales:"Sales", cs:"Client success", clinical:"Clinical ed", ops:"Sales ops"})[c] || c;
+}
+
+function setFilter(f, btn) {
+  activeFilter = f;
+  document.querySelectorAll(".fb").forEach(function(b) { b.classList.remove("active"); });
+  btn.classList.add("active");
+  renderJobs();
+}
+
+function loadTracker() { try { var s = localStorage.getItem(LS_T); applied = s ? JSON.parse(s) : {}; } catch(e) { applied = {}; } }
+function saveTracker() { localStorage.setItem(LS_T, JSON.stringify(applied)); }
+
+function updateBadge() {
+  var n = Object.keys(applied).length;
+  ["tcntD","tcntM"].forEach(function(id) {
+    var el = document.getElementById(id); if (!el) return;
+    if (n > 0) { el.style.display = ""; el.textContent = n; } else { el.style.display = "none"; }
+  });
+}
+
+function addToTracker(idx) {
+  var j = allJobs[idx]; if (!j) return;
+  var id = j.title + "|" + j.company;
+  if (!applied[id]) {
+    applied[id] = {title:j.title, company:j.company, location:j.location||"", url:j.url||"", status:"Applied", notes:"", date:new Date().toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"}), category:j.category};
+  }
+  saveTracker(); updateBadge(); renderJobs();
+}
+
+function renderJobs() {
+  var c = document.getElementById("jobs");
+  var list = allJobs;
+  if (activeFilter === "remote") list = allJobs.filter(function(j) { return j.isRemote; });
+  else if (activeFilter !== "all") list = allJobs.filter(function(j) { return j.category === activeFilter; });
+  if (!list.length) { c.innerHTML = '<div class="empty-st"><div class="empty-ic">&#128270;</div><div class="empty-tx">No listings matched this filter.</div></div>'; return; }
+  c.innerHTML = list.map(function(j) {
+    var ri = allJobs.indexOf(j);
+    var tracked = !!applied[j.title + "|" + j.company];
+    var acts = '<button class="ap" onclick="askJob(' + ri + ')">Ask Claude</button>'
+      + '<button class="ap" onclick="tailorFor(' + ri + ')">Tailor</button>'
+      + (tracked ? '<button class="ap tracked" disabled>&#10003; Tracking</button>' : '<button class="ap track" onclick="addToTracker(' + ri + ')">+ Track</button>');
+    var out = '<div class="jcard">';
+    out += '<div class="jch">';
+    out += '<div class="cav">' + escH(initials(j.company)) + '</div>';
+    out += '<div class="jmeta"><div class="jtitle">' + escH(j.title) + '</div><div class="jco">' + escH(j.company) + '</div></div>';
+    out += '<div class="jacts">' + acts + '</div>';
+    out += '</div>';
+    out += '<div class="badges"><span class="badge bc">' + catLbl(j.category) + '</span><span class="badge blo">' + escH(j.location) + '</span>';
+    if (j.isRemote) out += '<span class="badge br">Remote</span>';
+    if (j.source)   out += '<span class="badge bso">' + escH(j.source) + '</span>';
+    if (j.posted)   out += '<span class="badge bda">' + escH(j.posted) + '</span>';
+    if (j.salary)   out += '<span class="badge bso">' + escH(j.salary) + '</span>';
+    out += '</div>';
+    out += '<div class="jsumm">' + escH(j.summary) + '</div>';
+    if (j.url) out += '<a class="jlink" href="' + escH(j.url) + '" target="_blank">View listing &#8599;</a>';
+    out += '<div class="jacts-mob">' + acts + '</div>';
+    out += '</div>';
+    return out;
   }).join("");
 }
 
-function callClaude(prompt,useSearch,sys){var key=getKey();if(!key)return Promise.reject(new Error("No API key set"));var body={model:"claude-sonnet-4-20250514",max_tokens:4000,messages:[{role:"user",content:prompt}]};if(useSearch)body.tools=[{type:"web_search_20250305",name:"web_search"}];if(sys)body.system=sys;return fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json","x-api-key":key,"anthropic-version":"2023-06-01","anthropic-dangerous-direct-browser-access":"true"},body:JSON.stringify(body)}).then(function(r){if(!r.ok)return r.text().then(function(t){throw new Error("HTTP "+r.status+": "+t);});return r.json();}).then(function(d){if(d.error)throw new Error(d.error.message);var raw="";(d.content||[]).forEach(function(b){if(b.type==="text")raw+=b.text;});return raw.replace(/```json|```/g,"").trim();});}
+function callClaude(prompt, useSearch, sys) {
+  var key = getKey(); if (!key) return Promise.reject(new Error("No API key set"));
+  var body = {model:"claude-sonnet-4-20250514", max_tokens:4000, messages:[{role:"user", content:prompt}]};
+  if (useSearch) body.tools = [{type:"web_search_20250305", name:"web_search"}];
+  if (sys) body.system = sys;
+  return fetch("https://api.anthropic.com/v1/messages", {
+    method: "POST",
+    headers: {"Content-Type":"application/json", "x-api-key":key, "anthropic-version":"2023-06-01", "anthropic-dangerous-direct-browser-access":"true"},
+    body: JSON.stringify(body)
+  })
+  .then(function(r) { if (!r.ok) return r.text().then(function(t) { throw new Error("HTTP " + r.status + ": " + t); }); return r.json(); })
+  .then(function(d) {
+    if (d.error) throw new Error(d.error.message);
+    var raw = ""; (d.content||[]).forEach(function(b) { if (b.type === "text") raw += b.text; });
+    return raw.replace(/```json|```/g, "").trim();
+  });
+}
 
-function fetchJobs(){var key=getKey();if(!key){setStatus("Please enter your Anthropic API key above first.","err");return;}var btn=document.getElementById("rbtn");btn.disabled=true;btn.innerHTML='<span class="spinner"></span>Searching...';document.getElementById("jobs").innerHTML="";setStatus("Searching Indeed, LinkedIn, ZipRecruiter & more...","loading");fetchStart=Date.now();if(fetchTimer)clearInterval(fetchTimer);fetchTimer=setInterval(function(){var s=Math.round((Date.now()-fetchStart)/1000);document.getElementById("smsg").textContent="Searching Indeed, LinkedIn, ZipRecruiter & more... ("+s+"s elapsed)";},1000);var today=new Date().toLocaleDateString("en-US",{weekday:"long",year:"numeric",month:"long",day:"numeric"});var prompt="Today is "+today+". Search job boards for current openings and return ONLY a JSON array.\n\nBACKGROUND: "+BIO+"\n\nSEARCH: Indeed, LinkedIn Jobs, ZipRecruiter, Glassdoor, company career pages.\n\nTITLES: "+TITLES+"\nCOMPANIES: "+COMPANIES+"\nLOCATION: Phoenix/Mesa/Gilbert/Chandler/Scottsdale AZ metro OR remote-eligible for AZ candidates.\n\nFind 8-12 real current listings, prioritize recently posted. Return ONLY raw JSON array, no other text:\n[{\"title\":\"...\",\"company\":\"...\",\"location\":\"...\",\"salary\":\"...or null\",\"source\":\"Indeed/LinkedIn/etc\",\"posted\":\"Posted today/1 day ago/this week\",\"summary\":\"2-3 sentences on why great fit for Ashley\",\"url\":\"...or null\",\"isRemote\":false,\"category\":\"product or msl or sales or cs or clinical or ops\"}]";callClaude(prompt,true).then(function(raw){if(fetchTimer){clearInterval(fetchTimer);fetchTimer=null;}var s=raw.indexOf("["),e=raw.lastIndexOf("]");if(s<0||e<0)throw new Error("No job listings returned. Please try refreshing.");allJobs=JSON.parse(raw.slice(s,e+1));if(!allJobs.length)throw new Error("No matching jobs found right now -- try refreshing in a few minutes.");var elapsed=Math.round((Date.now()-fetchStart)/1000);setStatus("Found "+allJobs.length+" listings in "+elapsed+"s","ok");document.getElementById("tsub").textContent="Last refreshed "+new Date().toLocaleTimeString("en-US",{hour:"numeric",minute:"2-digit"})+" \u00b7 "+today;populateJobPicker();renderJobs();}).catch(function(err){if(fetchTimer){clearInterval(fetchTimer);fetchTimer=null;}setStatus(err.message,"err");document.getElementById("jobs").innerHTML='<div class="empty-st"><div class="empty-ic">&#128683;</div><div class="empty-tx">Could not load listings.<br>Please tap Refresh listings to try again.</div></div>';}).finally(function(){btn.disabled=false;btn.textContent="\u21BB Refresh listings";});}
+function fetchJobs() {
+  var key = getKey();
+  if (!key) { setStatus("Please enter your Anthropic API key above first.", "err"); return; }
+  var btn = document.getElementById("rbtn");
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span>Searching...';
+  document.getElementById("jobs").innerHTML = "";
+  setStatus("Searching Indeed, LinkedIn, ZipRecruiter & more...", "loading");
+  fetchStart = Date.now();
+  if (fetchTimer) clearInterval(fetchTimer);
+  fetchTimer = setInterval(function() {
+    var s = Math.round((Date.now() - fetchStart) / 1000);
+    document.getElementById("smsg").textContent = "Searching Indeed, LinkedIn, ZipRecruiter & more... (" + s + "s elapsed)";
+  }, 1000);
+  var today = new Date().toLocaleDateString("en-US", {weekday:"long", year:"numeric", month:"long", day:"numeric"});
+  var prompt = "Today is " + today + ". Search job boards for current openings and return ONLY a JSON array.\n\n"
+    + "BACKGROUND: " + BIO + "\n\n"
+    + "SEARCH: Indeed, LinkedIn Jobs, ZipRecruiter, Glassdoor, company career pages.\n\n"
+    + "TITLES: " + TITLES + "\n"
+    + "COMPANIES: " + COMPANIES + "\n"
+    + "LOCATION: Phoenix/Mesa/Gilbert/Chandler/Scottsdale AZ metro OR remote-eligible for AZ candidates.\n\n"
+    + "Find 8-12 real current listings, prioritize recently posted. Return ONLY raw JSON array, no other text:\n"
+    + '[{"title":"...","company":"...","location":"...","salary":"...or null","source":"Indeed/LinkedIn/etc","posted":"Posted today/1 day ago/this week","summary":"2-3 sentences on why great fit for Ashley","url":"...or null","isRemote":false,"category":"product or msl or sales or cs or clinical or ops"}]';
+  callClaude(prompt, true)
+  .then(function(raw) {
+    if (fetchTimer) { clearInterval(fetchTimer); fetchTimer = null; }
+    var s = raw.indexOf("["), e = raw.lastIndexOf("]");
+    if (s < 0 || e < 0) throw new Error("No job listings returned. Please try refreshing.");
+    allJobs = JSON.parse(raw.slice(s, e + 1));
+    if (!allJobs.length) throw new Error("No matching jobs found right now -- try refreshing in a few minutes.");
+    var elapsed = Math.round((Date.now() - fetchStart) / 1000);
+    setStatus("Found " + allJobs.length + " listings in " + elapsed + "s", "ok");
+    document.getElementById("tsub").textContent = "Last refreshed " + new Date().toLocaleTimeString("en-US",{hour:"numeric",minute:"2-digit"}) + " \u00b7 " + today;
+    populateJobPicker(); renderJobs();
+  })
+  .catch(function(err) {
+    if (fetchTimer) { clearInterval(fetchTimer); fetchTimer = null; }
+    setStatus(err.message, "err");
+    document.getElementById("jobs").innerHTML = '<div class="empty-st"><div class="empty-ic">&#128683;</div><div class="empty-tx">Could not load listings.<br>Please tap Refresh listings to try again.</div></div>';
+  })
+  .finally(function() { btn.disabled = false; btn.textContent = "\u21BB Refresh listings"; });
+}
 
-function chatKey(e){if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendChat();}}
-function addBubble(role,text){var row=document.createElement("div");row.className="brow"+(role==="user"?" u":"");var av=document.createElement("div");av.className="bav "+(role==="user"?"u":"ai");av.textContent=role==="user"?"A":"C";var bub=document.createElement("div");bub.className="bub "+(role==="user"?"u":"ai");bub.textContent=text;if(role==="user"){row.appendChild(bub);row.appendChild(av);}else{row.appendChild(av);row.appendChild(bub);}document.getElementById("cmsgs").appendChild(row);row.scrollIntoView({behavior:"smooth"});return bub;}
-function sendChat(){var input=document.getElementById("cin"),btn=document.getElementById("csend");var text=input.value.trim();if(!text)return;if(!getKey()){addBubble("ai","Please enter your API key on the Jobs tab first.");return;}input.value="";btn.disabled=true;addBubble("user",text);chatHistory.push({role:"user",content:text});var thinking=addBubble("ai","Thinking...");var jobCtx=allJobs.length?"Current job listings:\n"+allJobs.map(function(j){return "- "+j.title+" at "+j.company+" ("+j.location+"): "+j.summary;}).join("\n"):"No job listings loaded yet.";var sys="You are a personal career coach for Ashley Stadler. Be warm, direct, and specific.\n\nAshley background: "+BIO+"\n\n"+jobCtx+"\n\nHelp with job search questions, company research, interview prep, salary negotiation, positioning her PT background for industry roles.";var key=getKey();fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json","x-api-key":key,"anthropic-version":"2023-06-01","anthropic-dangerous-direct-browser-access":"true"},body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:1500,system:sys,messages:chatHistory.slice(-10)})}).then(function(r){if(!r.ok)return r.text().then(function(t){throw new Error("HTTP "+r.status);});return r.json();}).then(function(d){var reply="";(d.content||[]).forEach(function(b){if(b.type==="text")reply+=b.text;});thinking.textContent=reply;chatHistory.push({role:"assistant",content:reply});}).catch(function(err){thinking.textContent="Sorry, something went wrong: "+err.message;}).finally(function(){btn.disabled=false;});}
-function askJob(idx){var j=allJobs[idx];if(!j)return;document.querySelectorAll(".tab").forEach(function(b){if(b.getAttribute("onclick")&&b.getAttribute("onclick").indexOf("'chat'")>-1)b.click();});var q="Tell me about the "+j.title+" role at "+j.company+". What should I know and how should I position my PT background?";document.getElementById("cin").value=q;sendChat();}
-function saveResume(){localStorage.setItem(LS_R,document.getElementById("rtxt").value);}
-function loadResume(){var r=localStorage.getItem(LS_R);if(r)document.getElementById("rtxt").value=r;}
-function populateJobPicker(){var sel=document.getElementById("jpick"),cur=sel.value;sel.innerHTML="<option value=\"\">— select a job listing —</option>";allJobs.forEach(function(j,i){var o=document.createElement("option");o.value=i;o.textContent=j.title+" @ "+j.company;sel.appendChild(o);});if(cur)sel.value=cur;}
-function getSelJob(){var v=document.getElementById("jpick").value;return v!==""?allJobs[parseInt(v)]:null;}
-function showResult(lbl,text){document.getElementById("rlbl").textContent=lbl;document.getElementById("rout").textContent=text;document.getElementById("rrwrap").style.display="";document.getElementById("rloading").style.display="none";}
-function startLoad(){document.getElementById("rrwrap").style.display="none";document.getElementById("rloading").style.display="";}
-function tailorFor(idx){var j=allJobs[idx];if(!j)return;document.querySelectorAll(".tab").forEach(function(b){if(b.getAttribute("onclick")&&b.getAttribute("onclick").indexOf("'resume'")>-1)b.click();});setTimeout(function(){populateJobPicker();document.getElementById("jpick").value=idx;if(document.getElementById("rtxt").value)tailorResume();else alert("Please paste your resume in the Resume Tailor tab first!");},100);}
-function tailorResume(){var r=document.getElementById("rtxt").value.trim(),job=getSelJob();if(!r){alert("Please paste your resume first.");return;}if(!job){alert("Please select a job listing.");return;}startLoad();callClaude("Ashley is applying for: "+job.title+" at "+job.company+" ("+job.location+").\nJob: "+job.summary+"\n\nHer resume:\n"+r+"\n\nRewrite and tailor her resume for this role. Emphasize relevant experience. Highlight clinical expertise, P&L management, team leadership. Keep to 1 page. Return only the tailored resume.",false).then(function(res){showResult("Tailored resume \u2014 "+job.title+" @ "+job.company,res);}).catch(function(err){document.getElementById("rloading").style.display="none";alert("Error: "+err.message);});}
-function generateCover(){var r=document.getElementById("rtxt").value.trim(),job=getSelJob();if(!r){alert("Please paste your resume first.");return;}if(!job){alert("Please select a job listing.");return;}startLoad();callClaude("Write a compelling cover letter for Ashley Stadler applying for "+job.title+" at "+job.company+".\nJob: "+job.summary+"\nAshley: "+BIO+"\nResume:\n"+r+"\n\nStrong opening, 2-3 relevant accomplishments, genuine interest in this company, confident close. 3-4 paragraphs. Return only the cover letter.",false).then(function(res){showResult("Cover letter \u2014 "+job.title+" @ "+job.company,res);}).catch(function(err){document.getElementById("rloading").style.display="none";alert("Error: "+err.message);});}
-function genTalkingPts(){var job=getSelJob();if(!job){alert("Please select a job listing.");return;}startLoad();callClaude("Ashley ("+BIO+") has an interview for "+job.title+" at "+job.company+".\nJob: "+job.summary+"\n\nCreate interview talking points:\n1. Opening elevator pitch\n2. 3 strongest STAR stories from her PT and clinic director background\n3. 5 great questions to ask them\n4. 3 tough questions she may face and how to answer them\n\nBe specific to her background and this exact role.",false).then(function(res){showResult("Interview prep \u2014 "+job.title+" @ "+job.company,res);}).catch(function(err){document.getElementById("rloading").style.display="none";alert("Error: "+err.message);});}
-function copyResult(){navigator.clipboard.writeText(document.getElementById("rout").textContent).then(function(){alert("Copied!");});}
+function chatKey(e) { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); sendChat(); } }
 
-var SOPTS=["Applied","Phone Screen","Interview","Offer","Rejected"];
-function renderTracker(){loadTracker();updateBadge();var keys=Object.keys(applied);var cts={Applied:0,"Phone Screen":0,Interview:0,Offer:0,Rejected:0};keys.forEach(function(k){var s=applied[k].status;if(cts[s]!==undefined)cts[s]++;});document.getElementById("sstrip").innerHTML=[{l:"Total",v:keys.length},{l:"Active",v:cts.Applied+cts["Phone Screen"]+cts.Interview},{l:"Interviews",v:cts.Interview},{l:"Offers",v:cts.Offer},{l:"Rejected",v:cts.Rejected}].map(function(s){return'<div class="stat-block"><div class="stat-n">'+s.v+'</div><div class="stat-l">'+s.l+'</div></div>';}).join("");if(!keys.length){document.getElementById("tbody").innerHTML='<div class="t-empty">&#128218;<br><br>No applications tracked yet.<br>Hit <strong>+ Track</strong> on any job listing to start.</div>';return;}var rows=keys.map(function(k){var j=applied[k];var opts=SOPTS.map(function(o){return"<option"+(j.status===o?" selected":"")+">"+o+"</option>";}).join("");var ek=encodeURIComponent(k);return'<tr><td><div class="rname">'+escH(j.title)+'</div><div class="rco">'+escH(j.company)+'</div></td><td>'+escH(j.location||"")+'</td><td>'+escH(j.date||"")+'</td><td><select class="ssel" onchange="updSt(''+ek+'',this.value)">'+opts+'</select></td><td><input class="notef" value="'+escH(j.notes||"")+'" placeholder="Notes..." onchange="updNotes(''+ek+'',this.value)"></td><td>'+(j.url?'<a href="'+escH(j.url)+'" target="_blank" style="font-size:11px;color:var(--gn)">View &#8599;</a>':"")+'</td><td><button class="delbtn" onclick="delApp(''+ek+'')">&times;</button></td></tr>';}).join("");document.getElementById("tbody").innerHTML='<div class="ttbl-wrap"><table class="ttbl"><thead><tr><th>Role</th><th>Location</th><th>Applied</th><th>Status</th><th>Notes</th><th>Link</th><th></th></tr></thead><tbody>'+rows+'</tbody></table></div>';}
-function updSt(ek,v){var k=decodeURIComponent(ek);if(applied[k])applied[k].status=v;saveTracker();}
-function updNotes(ek,v){var k=decodeURIComponent(ek);if(applied[k])applied[k].notes=v;saveTracker();}
-function delApp(ek){var k=decodeURIComponent(ek);if(confirm("Remove this application?")&&applied[k]){delete applied[k];saveTracker();updateBadge();renderTracker();}}
-function exportCSV(){var rows=[["Title","Company","Location","Date Applied","Status","Notes","URL"]];Object.values(applied).forEach(function(j){rows.push([j.title,j.company,j.location||"",j.date||"",j.status,j.notes||"",j.url||""]);});var csv=rows.map(function(r){return r.map(function(c){return'"'+String(c).replace(/"/g,'""')+'"';}).join(",");}).join("\n");var a=document.createElement("a");a.href="data:text/csv;charset=utf-8,"+encodeURIComponent(csv);a.download="ashley_applications_"+new Date().toISOString().slice(0,10)+".csv";a.click();}
+function addBubble(role, text) {
+  var row = document.createElement("div"); row.className = "brow" + (role === "user" ? " u" : "");
+  var av = document.createElement("div"); av.className = "bav " + (role === "user" ? "u" : "ai"); av.textContent = role === "user" ? "A" : "C";
+  var bub = document.createElement("div"); bub.className = "bub " + (role === "user" ? "u" : "ai"); bub.textContent = text;
+  if (role === "user") { row.appendChild(bub); row.appendChild(av); } else { row.appendChild(av); row.appendChild(bub); }
+  document.getElementById("cmsgs").appendChild(row); row.scrollIntoView({behavior:"smooth"}); return bub;
+}
 
-window.addEventListener("load",function(){showMotd();loadTracker();updateBadge();loadResume();loadSavedKey();});
+function sendChat() {
+  var input = document.getElementById("cin"), btn = document.getElementById("csend");
+  var text = input.value.trim(); if (!text) return;
+  if (!getKey()) { addBubble("ai","Please enter your API key on the Jobs tab first."); return; }
+  input.value = ""; btn.disabled = true;
+  addBubble("user", text); chatHistory.push({role:"user", content:text});
+  var thinking = addBubble("ai", "Thinking...");
+  var jobCtx = allJobs.length ? "Current job listings:\n" + allJobs.map(function(j){ return "- " + j.title + " at " + j.company + " (" + j.location + "): " + j.summary; }).join("\n") : "No job listings loaded yet.";
+  var sys = "You are a personal career coach for Ashley Stadler. Be warm, direct, and specific.\n\nAshley background: " + BIO + "\n\n" + jobCtx + "\n\nHelp with job search questions, company research, interview prep, salary negotiation, positioning her PT background for industry roles.";
+  fetch("https://api.anthropic.com/v1/messages", {method:"POST", headers:{"Content-Type":"application/json","x-api-key":getKey(),"anthropic-version":"2023-06-01","anthropic-dangerous-direct-browser-access":"true"}, body:JSON.stringify({model:"claude-sonnet-4-20250514", max_tokens:1500, system:sys, messages:chatHistory.slice(-10)})})
+  .then(function(r){ if(!r.ok) return r.text().then(function(t){throw new Error("HTTP "+r.status);}); return r.json(); })
+  .then(function(d){ var reply=""; (d.content||[]).forEach(function(b){if(b.type==="text")reply+=b.text;}); thinking.textContent=reply; chatHistory.push({role:"assistant",content:reply}); })
+  .catch(function(err){ thinking.textContent="Sorry, something went wrong: "+err.message; })
+  .finally(function(){ btn.disabled=false; });
+}
+
+function askJob(idx) {
+  var j = allJobs[idx]; if (!j) return;
+  document.querySelectorAll(".tab").forEach(function(b){var oc=b.getAttribute("onclick")||""; if(oc.indexOf("'chat'")>-1) b.click();});
+  var q = "Tell me about the " + j.title + " role at " + j.company + ". What should I know and how should I position my PT background?";
+  document.getElementById("cin").value = q; sendChat();
+}
+
+function saveResume() { localStorage.setItem(LS_R, document.getElementById("rtxt").value); }
+function loadResume() { var r = localStorage.getItem(LS_R); if (r) document.getElementById("rtxt").value = r; }
+
+function populateJobPicker() {
+  var sel = document.getElementById("jpick"), cur = sel.value;
+  sel.innerHTML = "<option value=\"\">— select a job listing —</option>";
+  allJobs.forEach(function(j,i){ var o=document.createElement("option"); o.value=i; o.textContent=j.title+" @ "+j.company; sel.appendChild(o); });
+  if (cur) sel.value = cur;
+}
+
+function getSelJob() { var v=document.getElementById("jpick").value; return v!==""?allJobs[parseInt(v)]:null; }
+function showResult(lbl,text){ document.getElementById("rlbl").textContent=lbl; document.getElementById("rout").textContent=text; document.getElementById("rrwrap").style.display=""; document.getElementById("rloading").style.display="none"; }
+function startLoad(){ document.getElementById("rrwrap").style.display="none"; document.getElementById("rloading").style.display=""; }
+
+function tailorFor(idx) {
+  var j = allJobs[idx]; if (!j) return;
+  document.querySelectorAll(".tab").forEach(function(b){var oc=b.getAttribute("onclick")||""; if(oc.indexOf("'resume'")>-1) b.click();});
+  setTimeout(function(){ populateJobPicker(); document.getElementById("jpick").value=idx; if(document.getElementById("rtxt").value) tailorResume(); else alert("Please paste your resume in the Resume Tailor tab first!"); }, 100);
+}
+
+function tailorResume() {
+  var r=document.getElementById("rtxt").value.trim(), job=getSelJob();
+  if(!r){alert("Please paste your resume first.");return;} if(!job){alert("Please select a job listing.");return;}
+  startLoad();
+  callClaude("Ashley is applying for: "+job.title+" at "+job.company+" ("+job.location+").\nJob: "+job.summary+"\n\nHer resume:\n"+r+"\n\nRewrite and tailor her resume for this role. Emphasize relevant experience. Highlight clinical expertise, P&L management, team leadership. Keep to 1 page. Return only the tailored resume.", false)
+  .then(function(res){ showResult("Tailored resume \u2014 "+job.title+" @ "+job.company, res); })
+  .catch(function(err){ document.getElementById("rloading").style.display="none"; alert("Error: "+err.message); });
+}
+
+function generateCover() {
+  var r=document.getElementById("rtxt").value.trim(), job=getSelJob();
+  if(!r){alert("Please paste your resume first.");return;} if(!job){alert("Please select a job listing.");return;}
+  startLoad();
+  callClaude("Write a compelling cover letter for Ashley Stadler applying for "+job.title+" at "+job.company+".\nJob: "+job.summary+"\nAshley: "+BIO+"\nResume:\n"+r+"\n\nStrong opening, 2-3 relevant accomplishments, genuine interest in this company, confident close. 3-4 paragraphs. Return only the cover letter.", false)
+  .then(function(res){ showResult("Cover letter \u2014 "+job.title+" @ "+job.company, res); })
+  .catch(function(err){ document.getElementById("rloading").style.display="none"; alert("Error: "+err.message); });
+}
+
+function genTalkingPts() {
+  var job=getSelJob(); if(!job){alert("Please select a job listing.");return;}
+  startLoad();
+  callClaude("Ashley ("+BIO+") has an interview for "+job.title+" at "+job.company+".\nJob: "+job.summary+"\n\nCreate interview talking points:\n1. Opening elevator pitch\n2. 3 strongest STAR stories from her PT and clinic director background\n3. 5 great questions to ask them\n4. 3 tough questions she may face and how to answer them\n\nBe specific to her background and this exact role.", false)
+  .then(function(res){ showResult("Interview prep \u2014 "+job.title+" @ "+job.company, res); })
+  .catch(function(err){ document.getElementById("rloading").style.display="none"; alert("Error: "+err.message); });
+}
+
+function copyResult() { navigator.clipboard.writeText(document.getElementById("rout").textContent).then(function(){alert("Copied!");}); }
+
+var SOPTS = ["Applied","Phone Screen","Interview","Offer","Rejected"];
+
+function renderTracker() {
+  loadTracker(); updateBadge();
+  var keys = Object.keys(applied);
+  var cts = {Applied:0,"Phone Screen":0,Interview:0,Offer:0,Rejected:0};
+  keys.forEach(function(k){ var s=applied[k].status; if(cts[s]!==undefined) cts[s]++; });
+  document.getElementById("sstrip").innerHTML = [{l:"Total",v:keys.length},{l:"Active",v:cts.Applied+cts["Phone Screen"]+cts.Interview},{l:"Interviews",v:cts.Interview},{l:"Offers",v:cts.Offer},{l:"Rejected",v:cts.Rejected}]
+    .map(function(s){ return '<div class="stat-block"><div class="stat-n">'+s.v+'</div><div class="stat-l">'+s.l+'</div></div>'; }).join("");
+  if (!keys.length) { document.getElementById("tbody").innerHTML='<div class="t-empty">&#128218;<br><br>No applications tracked yet.<br>Hit <strong>+ Track</strong> on any job listing to start.</div>'; return; }
+  var rows = keys.map(function(k){
+    var j=applied[k];
+    var opts=SOPTS.map(function(o){return "<option"+(j.status===o?" selected":"")+">"+o+"</option>";}).join("");
+    var ek=encodeURIComponent(k);
+    return "<tr>"
+      +"<td><div class=\"rname\">"+escH(j.title)+"</div><div class=\"rco\">"+escH(j.company)+"</div></td>"
+      +"<td>"+escH(j.location||"")+"</td><td>"+escH(j.date||"")+"</td>"
+      +"<td><select class=\"ssel\" onchange=\"updSt('"+ek+"',this.value)\">"+opts+"</select></td>"
+      +"<td><input class=\"notef\" value=\""+escH(j.notes||"")+"\" placeholder=\"Notes...\" onchange=\"updNotes('"+ek+"',this.value)\"></td>"
+      +"<td>"+(j.url?"<a href=\""+escH(j.url)+"\" target=\"_blank\" style=\"font-size:11px;color:var(--gn)\">View &#8599;</a>":"")+"</td>"
+      +"<td><button class=\"delbtn\" onclick=\"delApp('"+ek+"')\">&times;</button></td>"
+      +"</tr>";
+  }).join("");
+  document.getElementById("tbody").innerHTML='<div class="ttbl-wrap"><table class="ttbl"><thead><tr><th>Role</th><th>Location</th><th>Applied</th><th>Status</th><th>Notes</th><th>Link</th><th></th></tr></thead><tbody>'+rows+'</tbody></table></div>';
+}
+
+function updSt(ek,v){ var k=decodeURIComponent(ek); if(applied[k]) applied[k].status=v; saveTracker(); }
+function updNotes(ek,v){ var k=decodeURIComponent(ek); if(applied[k]) applied[k].notes=v; saveTracker(); }
+function delApp(ek){ var k=decodeURIComponent(ek); if(confirm("Remove this application?")&&applied[k]){ delete applied[k]; saveTracker(); updateBadge(); renderTracker(); } }
+
+function exportCSV() {
+  var rows=[["Title","Company","Location","Date Applied","Status","Notes","URL"]];
+  Object.values(applied).forEach(function(j){ rows.push([j.title,j.company,j.location||"",j.date||"",j.status,j.notes||"",j.url||""]); });
+  var csv=rows.map(function(r){return r.map(function(c){return '"'+String(c).replace(/"/g,'""')+'"';}).join(",");}).join("\n");
+  var a=document.createElement("a"); a.href="data:text/csv;charset=utf-8,"+encodeURIComponent(csv); a.download="ashley_applications_"+new Date().toISOString().slice(0,10)+".csv"; a.click();
+}
+
+window.addEventListener("load", function() { showMotd(); loadTracker(); updateBadge(); loadResume(); loadSavedKey(); });
 </script>
 </body>
 </html>
