@@ -67,6 +67,8 @@ body{font-family:"DM Sans",sans-serif;background:var(--bg);color:var(--tx);min-h
 .bc{background:var(--pbg);color:var(--pu)}.blo{background:var(--bbg);color:var(--bl)}.br{background:var(--gbg);color:var(--gt)}.bso{background:var(--s2);color:var(--t2);border:1px solid var(--bd)}.bda{background:var(--abg);color:var(--am)}
 .jsumm{font-size:12px;color:var(--t2);margin-top:8px;line-height:1.6}
 .jlink{display:inline-flex;align-items:center;gap:3px;margin-top:8px;font-size:11.5px;font-weight:500;color:var(--gn);text-decoration:none}
+.jdel{background:none;border:none;cursor:pointer;color:var(--t3);font-size:18px;line-height:1;padding:0 0 0 8px;flex-shrink:0;margin-left:auto}
+.jdel:hover{color:#DC2626}
 @keyframes spin{to{transform:rotate(360deg)}}
 .spinner{width:18px;height:18px;border:2px solid var(--bd);border-top-color:var(--gn);border-radius:50%;animation:spin .7s linear infinite;display:inline-block;vertical-align:middle;margin-right:5px}
 .empty-st{text-align:center;padding:2.5rem 1rem;color:var(--t3)}.empty-ic{font-size:36px;margin-bottom:10px;opacity:.35}.empty-tx{font-size:13px;line-height:1.7}
@@ -202,7 +204,7 @@ body{font-family:"DM Sans",sans-serif;background:var(--bg);color:var(--tx);min-h
 var allJobs = [], activeFilter = "all", chatHistory = [], applied = {};
 var TITLES = "Associate Product Manager (medical device), Product Manager (medical device), Medical Science Liaison, Sales Force Enablement / Training, Client Success Manager, Clinical Education Specialist, Staff Sales Operations Analyst, Customer Success / Account Manager";
 var COMPANIES = "BD, Arthrex, Stryker, Medtronic, Biotronik, Abbott, Zimmer Biomet, Boston Scientific, Insulet, Edwards Lifesciences, DePuy Synthes, Dexcom, Intuitive Surgical, Smith & Nephew, Globus Medical, Synergy Spine Solutions, Gore, Personify Health, Prompt AI, Ambience Healthcare, Limber Health";
-var LS_KEY = "ashley_api_key", LS_R = "ashley_resume", LS_T = "ashley_tracker";
+var LS_KEY = "ashley_api_key", LS_R = "ashley_resume", LS_T = "ashley_tracker", LS_JOBS = "ashley_jobs";
 var BIO = "Ashley Stadler PT DPT OCS. 15 years as a Physical Therapist. Clinic Director at Banner PT Mesa AZ since Nov 2023: grew clinic from 2 to 9 clinicians, cut contract labor 85%, managed P&L above budget. Previously Staff PT and Patient Engagement Specialist at Banner PT 2019-2023, Staff PT and CCCE at Select PT 2010-2016. DPT Northern Arizona University, BS Exercise Science magna cum laude University of New Mexico. Licensed PT 2010, OCS 2013-2023, Graston, Credentialed Clinical Instructor. Pivoting to medical device and health-tech industry.";
 var MSGS = [
   {e:"&#127775;", t:"Your clinical expertise is your superpower.", b:"15 years of patient outcomes, team leadership, and real-world ortho knowledge -- exactly what med-device companies need."},
@@ -310,6 +312,9 @@ function setFilter(f, btn) {
 
 function loadTracker() { try { var s = localStorage.getItem(LS_T); applied = s ? JSON.parse(s) : {}; } catch(e) { applied = {}; } }
 function saveTracker() { localStorage.setItem(LS_T, JSON.stringify(applied)); }
+function saveJobs() { try { localStorage.setItem(LS_JOBS, JSON.stringify(allJobs)); } catch(e) {} }
+function loadJobs() { try { var s = localStorage.getItem(LS_JOBS); if (s) { allJobs = JSON.parse(s); if (allJobs.length) { populateJobPicker(); renderJobs(); } } } catch(e) { allJobs = []; } }
+function deleteJob(idx) { allJobs.splice(idx, 1); saveJobs(); populateJobPicker(); renderJobs(); }
 
 function updateBadge() {
   var n = Object.keys(applied).length;
@@ -406,10 +411,16 @@ function fetchJobs() {
     if (fetchTimer) { clearInterval(fetchTimer); fetchTimer = null; }
     var s = raw.indexOf("["), e = raw.lastIndexOf("]");
     if (s < 0 || e < 0) throw new Error("No job listings returned. Please try refreshing.");
-    allJobs = JSON.parse(raw.slice(s, e + 1));
+    var fetched = JSON.parse(raw.slice(s, e + 1));
+    var seen = {};
+    allJobs.forEach(function(j) { seen[j.title + "|" + j.company] = true; });
+    var added = 0;
+    fetched.forEach(function(j) { if (!seen[j.title + "|" + j.company]) { allJobs.unshift(j); added++; } });
     if (!allJobs.length) throw new Error("No matching jobs found right now -- try refreshing in a few minutes.");
+    saveJobs();
     var elapsed = Math.round((Date.now() - fetchStart) / 1000);
-    setStatus("Found " + allJobs.length + " listings in " + elapsed + "s", "ok");
+    var msg = added > 0 ? "Added " + added + " new listing" + (added > 1 ? "s" : "") + " (" + allJobs.length + " total) in " + elapsed + "s" : "No new listings found. " + allJobs.length + " saved.";
+    setStatus(msg, "ok");
     document.getElementById("tsub").textContent = "Last refreshed " + new Date().toLocaleTimeString("en-US",{hour:"numeric",minute:"2-digit"}) + " \u00b7 " + today;
     populateJobPicker(); renderJobs();
   })
