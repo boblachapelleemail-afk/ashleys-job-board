@@ -410,7 +410,7 @@ function fetchJobs() {
     if (fetchTimer) { clearInterval(fetchTimer); fetchTimer = null; }
     var s = raw.indexOf("["), e = raw.lastIndexOf("]");
     if (s < 0 || e < 0) throw new Error("No job listings returned. Please try refreshing.");
-    var fetched = JSON.parse(raw.slice(s, e + 1));
+    var fetched = JSON.parse(raw.slice(s, e + 1)).filter(function(j) { var loc = (j.location || "").toLowerCase(); return !(/(^|\s)field(\s|$|,)/.test(loc) || /field.?work/.test(loc) || /field.?role/.test(loc)); });
     var seen = {};
     allJobs.forEach(function(j) { seen[j.title + "|" + j.company] = true; });
     var added = 0;
