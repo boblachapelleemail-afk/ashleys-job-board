@@ -345,12 +345,11 @@ function renderJobs() {
     var acts = '<button class="ap" onclick="askJob(' + ri + ')">Ask Claude</button>'
       + '<button class="ap" onclick="tailorFor(' + ri + ')">Tailor</button>'
       + (tracked ? '<button class="ap tracked" disabled>&#10003; Tracking</button>' : '<button class="ap track" onclick="addToTracker(' + ri + ')">+ Track</button>');
+    var delBtn = '<button class="jdel" onclick="deleteJob(' + ri + ')" title="Dismiss">×</button>';
     var out = '<div class="jcard">';
-    out += '<div class="jch">';
-    out += '<div class="cav">' + escH(initials(j.company)) + '</div>';
+    out += '<div class="jch"><div class="cav">' + escH(initials(j.company)) + '</div>';
     out += '<div class="jmeta"><div class="jtitle">' + escH(j.title) + '</div><div class="jco">' + escH(j.company) + '</div></div>';
-    out += '<div class="jacts">' + acts + '</div>';
-    out += '</div>';
+    out += '<div class="jacts">' + acts + delBtn + '</div></div>';
     out += '<div class="badges"><span class="badge bc">' + catLbl(j.category) + '</span><span class="badge blo">' + escH(j.location) + '</span>';
     if (j.isRemote) out += '<span class="badge br">Remote</span>';
     if (j.source)   out += '<span class="badge bso">' + escH(j.source) + '</span>';
@@ -359,7 +358,7 @@ function renderJobs() {
     out += '</div>';
     out += '<div class="jsumm">' + escH(j.summary) + '</div>';
     if (j.url) out += '<a class="jlink" href="' + escH(j.url) + '" target="_blank">View listing &#8599;</a>';
-    out += '<div class="jacts-mob">' + acts + '</div>';
+    out += '<div class="jacts-mob">' + acts + delBtn + '</div>';
     out += '</div>';
     return out;
   }).join("");
