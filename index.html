@@ -161,6 +161,9 @@ body{font-family:"DM Sans",sans-serif;background:var(--bg);color:var(--tx);min-h
     <button class="fb" onclick="setFilter('sales',this)">Sales &amp; enablement</button>
     <button class="fb" onclick="setFilter('cs',this)">Client success</button>
     <button class="fb" onclick="setFilter('clinical',this)">Clinical ed</button>
+    <button class="fb" onclick="setFilter('acct',this)">Account Mgr</button>
+    <button class="fb" onclick="setFilter('clinsucc',this)">Clinical Success</button>
+    <button class="fb" onclick="setFilter('impl',this)">Implementation</button>
     <button class="fb" onclick="setFilter('remote',this)">Remote only</button>
     <button class="rbtn" id="rbtn" onclick="fetchJobs()">&#8635; Refresh listings</button>
   </div>
@@ -299,7 +302,7 @@ function initials(c) {
 }
 
 function catLbl(c) {
-  return ({product:"Product/APM", msl:"MSL", sales:"Sales", cs:"Client success", clinical:"Clinical ed", ops:"Sales ops"})[c] || c;
+  return ({product:"Product/APM", msl:"MSL", sales:"Sales", cs:"Client success", clinical:"Clinical ed", ops:"Sales ops",acct:"Account Mgr",clinsucc:"Clinical Success",impl:"Implementation"})[c] || c;
 }
 
 function setFilter(f, btn) {
@@ -344,7 +347,7 @@ function renderJobs() {
     var acts = '<button class="ap" onclick="askJob(' + ri + ')">Ask Claude</button>'
       + '<button class="ap" onclick="tailorFor(' + ri + ')">Tailor</button>'
       + (tracked ? '<button class="ap tracked" disabled>&#10003; Tracking</button>' : '<button class="ap track" onclick="addToTracker(' + ri + ')">+ Track</button>');
-    var delBtn = '<button class="jdel" onclick="deleteJob(' + ri + ')" title="Dismiss">×</button>';
+    var delBtn = '<button class="jdel" onclick="deleteJob(' + ri + ')" title="Dismiss">Ã</button>';
     var out = '<div class="jcard">';
     out += '<div class="jch"><div class="cav">' + escH(initials(j.company)) + '</div>';
     out += '<div class="jmeta"><div class="jtitle">' + escH(j.title) + '</div><div class="jco">' + escH(j.company) + '</div></div>';
@@ -403,7 +406,7 @@ function fetchJobs() {
     + "COMPANIES: " + COMPANIES + "\n"
     + "LOCATION: Phoenix/Mesa/Gilbert/Chandler/Scottsdale AZ metro OR remote-eligible for AZ candidates.\n\n"
     + "Find 8-12 real current listings, prioritize recently posted. Return ONLY raw JSON array, no other text:\n"
-    + '[{"title":"...","company":"...","location":"...","salary":"...or null","source":"Indeed/LinkedIn/etc","posted":"Posted today/1 day ago/this week","summary":"2-3 sentences on why great fit for Ashley","url":"...or null","isRemote":false,"category":"product or msl or sales or cs or clinical or ops"}]';
+    + '[{"title":"...","company":"...","location":"...","salary":"...or null","source":"Indeed/LinkedIn/etc","posted":"Posted today/1 day ago/this week","summary":"2-3 sentences on why great fit for Ashley","url":"...or null","isRemote":false,"category":"product or msl or sales or cs or clinical or ops or acct or clinsucc or impl"}]';
   callClaude(prompt, true)
   .then(function(raw) {
     if (fetchTimer) { clearInterval(fetchTimer); fetchTimer = null; }
@@ -468,7 +471,7 @@ function loadResume() { var r = localStorage.getItem(LS_R); if (r) document.getE
 
 function populateJobPicker() {
   var sel = document.getElementById("jpick"), cur = sel.value;
-  sel.innerHTML = "<option value=\"\">— select a job listing —</option>";
+  sel.innerHTML = "<option value=\"\">â select a job listing â</option>";
   allJobs.forEach(function(j,i){ var o=document.createElement("option"); o.value=i; o.textContent=j.title+" @ "+j.company; sel.appendChild(o); });
   if (cur) sel.value = cur;
 }
