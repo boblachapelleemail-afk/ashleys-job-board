@@ -120,6 +120,7 @@ body{font-family:"DM Sans",sans-serif;background:var(--bg);color:var(--tx);min-h
 .delbtn{background:none;border:none;color:var(--t3);cursor:pointer;font-size:15px;padding:0 3px}.delbtn:hover{color:#DC2626}
 .t-empty{background:var(--s);border:1px solid var(--bd);border-radius:var(--r);padding:2.5rem;text-align:center;color:var(--t3);font-size:13px;box-shadow:var(--sh)}
 .cbadge{display:inline-flex;align-items:center;justify-content:center;background:#DC2626;color:white;font-size:10px;font-weight:700;border-radius:99px;min-width:17px;height:17px;padding:0 4px;margin-left:4px}
+.verbadge{font-size:10px;font-weight:500;color:var(--t2);background:var(--s2);border:1px solid var(--bd);border-radius:4px;padding:1px 7px;margin-left:6px;letter-spacing:.01em;white-space:nowrap;}
 </style>
 </head>
 <body>
@@ -127,7 +128,7 @@ body{font-family:"DM Sans",sans-serif;background:var(--bg);color:var(--tx);min-h
   <div class="topbar-row1">
     <div class="brand">
       <div class="brand-icon">&#127807;</div>
-      <div><div class="brand-name">Ashley&#8217;s Career Hub</div><div class="brand-sub" id="tsub">med-device &middot; MSL &middot; product &middot; clinical ed</div></div>
+      <div><div class="brand-name">Ashley&#8217;s Career Hub</div><span class="verbadge" id="verbadge"></span><div class="brand-sub" id="tsub">med-device &middot; MSL &middot; product &middot; clinical ed</div></div>
     </div>
     <div class="tabs-desktop">
       <button class="tab active" onclick="showTab('jobs',this)">&#128269; Jobs</button>
@@ -205,6 +206,7 @@ body{font-family:"DM Sans",sans-serif;background:var(--bg);color:var(--tx);min-h
 </div>
 <script>
 var allJobs = [], activeFilter = "all", chatHistory = [], applied = {};
+var VERSION = "1.1";
 var TITLES = "Associate Product Manager (medical device), Product Manager (medical device), Medical Science Liaison, Sales Force Enablement / Training, Client Success Manager, Clinical Education Specialist, Clinical Success, Staff Sales Operations Analyst, Customer Success / Account Manager, Account Manager, Client Implementation Operations";
 var COMPANIES = "BD, Arthrex, Stryker, Medtronic, Biotronik, Abbott, Zimmer Biomet, Boston Scientific, Insulet, Edwards Lifesciences, DePuy Synthes, Dexcom, Intuitive Surgical, Smith & Nephew, Globus Medical, Synergy Spine Solutions, Gore, Personify Health, Prompt AI, Ambience Healthcare, Limber Health, Nevro Corp, Align Technology, Raintree Systems, ResMed, Hologic, Eli Lilly, AstraZeneca, Novartis, Johnson & Johnson MedTech, Philips Healthcare, Siemens Healthineers, Baxter International, GoodRx, Solera Health, Dragonfly Health";
 var BIO = "Ashley Stadler PT DPT OCS. 15 years as a Physical Therapist. Clinic Director at Banner PT Mesa AZ since Nov 2023: grew clinic from 2 to 9 clinicians, cut contract labor 85%, managed P&L above budget. Previously Staff PT and Patient Engagement Specialist at Banner PT 2019-2023, Staff PT and CCCE at Select PT 2010-2016. DPT Northern Arizona University, BS Exercise Science magna cum laude University of New Mexico. Licensed PT 2010, OCS 2013-2023, Graston, Credentialed Clinical Instructor. Pivoting to medical device and health-tech industry.";
@@ -347,7 +349,7 @@ function renderJobs() {
     var acts = '<button class="ap" onclick="askJob(' + ri + ')">Ask Claude</button>'
       + '<button class="ap" onclick="tailorFor(' + ri + ')">Tailor</button>'
       + (tracked ? '<button class="ap tracked" disabled>&#10003; Tracking</button>' : '<button class="ap track" onclick="addToTracker(' + ri + ')">+ Track</button>');
-    var delBtn = '<button class="jdel" onclick="deleteJob(' + ri + ')" title="Dismiss">Ã</button>';
+    var delBtn = '<button class="jdel" onclick="deleteJob(' + ri + ')" title="Dismiss">ÃÂ</button>';
     var out = '<div class="jcard">';
     out += '<div class="jch"><div class="cav">' + escH(initials(j.company)) + '</div>';
     out += '<div class="jmeta"><div class="jtitle">' + escH(j.title) + '</div><div class="jco">' + escH(j.company) + '</div></div>';
@@ -471,7 +473,7 @@ function loadResume() { var r = localStorage.getItem(LS_R); if (r) document.getE
 
 function populateJobPicker() {
   var sel = document.getElementById("jpick"), cur = sel.value;
-  sel.innerHTML = "<option value=\"\">â select a job listing â</option>";
+  sel.innerHTML = "<option value=\"\">Ã¢ÂÂ select a job listing Ã¢ÂÂ</option>";
   allJobs.forEach(function(j,i){ var o=document.createElement("option"); o.value=i; o.textContent=j.title+" @ "+j.company; sel.appendChild(o); });
   if (cur) sel.value = cur;
 }
@@ -551,7 +553,7 @@ function exportCSV() {
   var a=document.createElement("a"); a.href="data:text/csv;charset=utf-8,"+encodeURIComponent(csv); a.download="ashley_applications_"+new Date().toISOString().slice(0,10)+".csv"; a.click();
 }
 
-window.addEventListener("load", function() { showMotd(); loadTracker(); updateBadge(); loadResume(); loadSavedKey(); });
+window.addEventListener("load", function() { var vb=document.getElementById("verbadge"); if(vb) vb.textContent="v"+VERSION; showMotd(); loadTracker(); updateBadge(); loadResume(); loadSavedKey(); });
 </script>
 </body>
 </html>
